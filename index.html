@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" data-theme="auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anastasiia Chaplyhina – CV & Portfolio</title>
 
-    <!-- Шрифти (мінімалістично) -->
+    <!-- Шрифти -->
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- Опціонально: колір тулбара у мобільних браузерах оновлюємо через JS -->
+    <meta name="theme-color" content="#FADADD" id="meta-theme-color" />
   </head>
   <body>
     <!-- індикатор прокрутки -->
@@ -27,6 +29,17 @@
           <li><a href="#kontakt">Kontakt</a></li>
           <li class="lang-switch">
             <a href="#" aria-label="Switch to English">EN</a>
+          </li>
+          <li class="theme-switch">
+            <button
+              id="theme-toggle"
+              class="theme-btn"
+              type="button"
+              aria-pressed="false"
+              aria-label="Toggle color theme"
+            >
+              🌙 Dark
+            </button>
           </li>
         </ul>
       </nav>

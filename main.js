@@ -1,82 +1,70 @@
-// Плавна навігація по якорях
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const target = document.querySelector(id);
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    history.pushState(null, '', id);
+// ---------- ТЕМИ: Pastel / Dark з пам'яттю ----------
+(function themeInit(){
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const metaTheme = document.getElementById('meta-theme-color');
+
+  const THEMES = { AUTO:'auto', LIGHT:'light', DARK:'dark' };
+  const STORAGE_KEY = 'theme-preference';
+
+  // Прочитати збережену тему
+  const saved = localStorage.getItem(STORAGE_KEY); // 'light' | 'dark' | 'auto' | null
+  const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Встановити атрибут теми
+  function applyTheme(mode){
+    html.setAttribute('data-theme', mode);
+    updateToggleLabel(mode);
+    updateMetaThemeColor(mode);
+  }
+
+  // Оновити текст/іконку кнопки
+  function updateToggleLabel(mode){
+    const isDark = (mode === THEMES.DARK) || (mode === THEMES.AUTO && systemPrefersDark);
+    btn.textContent = isDark ? '🌤 Pastel' : '🌙 Dark';
+    btn.setAttribute('aria-pressed', String(isDark));
+  }
+
+  function currentMode(){
+    return html.getAttribute('data-theme') || THEMES.AUTO;
+  }
+
+  // Оновити <meta name="theme-color"> під тему (для мобільних тулбарів)
+  function updateMetaThemeColor(mode){
+    const effectiveDark = (mode === THEMES.DARK) || (mode === THEMES.AUTO && systemPrefersDark);
+    // Підіймаємо з CSS-перемінних
+    const styles = getComputedStyle(document.documentElement);
+    const headerColor = styles.getPropertyValue('--accent-1').trim() || (effectiveDark ? '#2a2f3a' : '#FADADD');
+    if (metaTheme) metaTheme.setAttribute('content', headerColor);
+  }
+
+  // Ініціалізація
+  applyTheme(saved || THEMES.AUTO);
+
+  // Реагувати на зміну системної теми, якщо режим "auto"
+  if (window.matchMedia){
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    mq.addEventListener?.('change', () => {
+      if (currentMode() === THEMES.AUTO){
+        updateToggleLabel(THEMES.AUTO);
+        updateMetaThemeColor(THEMES.AUTO);
+      }
+    });
+  }
+
+  // Клік по кнопці: циклічно перемикаємо Light → Dark → Auto → Light...
+  btn?.addEventListener('click', () => {
+    const mode = currentMode();
+    const next = mode === THEMES.LIGHT ? THEMES.DARK
+               : mode === THEMES.DARK  ? THEMES.AUTO
+               : THEMES.LIGHT;
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
   });
-});
-
-// Reveal-on-scroll
-(function setupReveal() {
-  const revealEls = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    revealEls.forEach(el => el.classList.add('is-visible'));
-    return;
-  }
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target); // одноразово
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
-  revealEls.forEach(el => io.observe(el));
 })();
 
-// Підсвічування активного пункту меню
-(function highlightActiveNav() {
-  const sections = [...document.querySelectorAll('main section[id]')];
-  const linkMap = new Map(
-    [...document.querySelectorAll('nav a[href^="#"]')].map(a => [a.getAttribute('href').slice(1), a])
-  );
-  if (!('IntersectionObserver' in window)) return;
+// ---------- Плавна навігація по якорях ----------
+document.querySelectorAll('a[href^="#"]').forE
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = linkMap.get(id);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        linkMap.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      }
-    });
-  }, { threshold: 0.6 });
-
-  sections.forEach(s => io.observe(s));
-})();
-
-// Прогрес-бар прокрутки (безкоштовно + продуктивно)
-(function scrollProgress() {
-  const root = document.documentElement;
-  let ticking = false;
-
-  function update() {
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const y = window.scrollY || window.pageYOffset;
-    const p = h > 0 ? Math.min(1, Math.max(0, y / h)) : 0;
-    root.style.setProperty('--scroll', p.toFixed(3));
-    ticking = false;
-  }
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(update);
-      ticking = true;
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  update();
-
-  // рік у футері
-  const yEl = document.getElementById('year');
-  if (yEl) yEl.textContent = new Date().getFullYear();
-})();
 
 

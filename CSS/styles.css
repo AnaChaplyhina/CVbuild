@@ -1,11 +1,44 @@
-/* ===== Палiтра (пастель) і шрифти ===== */
+/* ===== Палiтра (пастель) за замовчуванням ===== */
 :root {
-    --pink: #FADADD;
-    --mint: #DAFFE7;
-    --cream: #FFF5DA;
+    --bg: #FFF5DA;
+    /* cream */
     --ink: #2f2f2f;
     --muted: #626262;
+    --accent-1: #FADADD;
+    /* pink */
+    --accent-2: #DAFFE7;
+    /* mint */
     --card: #ffffffcc;
+    --border: #00000010;
+    --shadow: #0000000b;
+}
+
+/* ===== Темна палітра (вмикається через [data-theme="dark"]) ===== */
+html[data-theme="dark"] {
+    --bg: #111418;
+    --ink: #EDEFF2;
+    --muted: #a9b0b7;
+    --accent-1: #2a2f3a;
+    /* м’який “рожевий” → тепла сіро-фіолетова підкладка */
+    --accent-2: #1d4637;
+    /* м’ятний → темний зелено-блакитний для ховерів */
+    --card: #181c22ee;
+    --border: #ffffff12;
+    --shadow: #00000066;
+}
+
+/* ===== Автодетект системної теми (коли data-theme="auto") ===== */
+@media (prefers-color-scheme: dark) {
+    html[data-theme="auto"] {
+        --bg: #111418;
+        --ink: #EDEFF2;
+        --muted: #a9b0b7;
+        --accent-1: #2a2f3a;
+        --accent-2: #1d4637;
+        --card: #181c22ee;
+        --border: #ffffff12;
+        --shadow: #00000066;
+    }
 }
 
 /* Базові */
@@ -20,9 +53,16 @@ html {
 body {
     margin: 0;
     color: var(--ink);
-    background: var(--cream);
+    background: var(--bg);
     font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+}
+
+/* Доступність: видимий фокус */
+:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
 }
 
 /* Прогрес прокрутки */
@@ -33,16 +73,17 @@ body {
     width: 100%;
     transform-origin: left;
     transform: scaleX(var(--scroll, 0));
-    background: linear-gradient(90deg, var(--pink), var(--mint));
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
     z-index: 1000;
     pointer-events: none;
 }
 
 /* Header */
 .site-header {
-    background: var(--pink);
+    background: var(--accent-1);
     text-align: center;
     padding: 48px 16px 28px;
+    transition: background .25s ease;
 }
 
 .site-nav ul {
@@ -60,13 +101,26 @@ body {
     color: var(--ink);
     padding: .35rem .6rem;
     border-radius: .5rem;
-    transition: background .2s ease;
+    transition: background .2s ease, color .2s ease;
 }
 
 .site-nav a:hover,
 .site-nav a.active {
-    background: var(--mint);
+    background: var(--accent-2);
     text-decoration: underline;
+}
+
+.theme-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    padding: .35rem .6rem;
+    border-radius: .6rem;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.theme-btn:hover {
+    background: var(--accent-2)
 }
 
 .title {
@@ -99,7 +153,7 @@ h2 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 1.6rem;
-    border-bottom: 2px solid var(--pink);
+    border-bottom: 2px solid var(--accent-1);
     padding-bottom: .35rem;
     margin: 0 0 16px;
 }
@@ -107,11 +161,11 @@ h2 {
 .card {
     background: var(--card);
     backdrop-filter: saturate(120%) blur(2px);
-    border: 1px solid #00000010;
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
     margin: 14px 0;
-    box-shadow: 0 2px 10px #0000000b;
+    box-shadow: 0 2px 10px var(--shadow);
 }
 
 .job header {
@@ -138,7 +192,7 @@ h2 {
 
 .skills-grid li {
     padding: 10px 12px;
-    border: 1px dashed #0000001f;
+    border: 1px dashed var(--border);
     border-radius: 10px;
 }
 
@@ -151,8 +205,8 @@ address {
     text-align: center;
     padding: 18px 12px;
     color: var(--muted);
-    border-top: 1px solid #00000012;
-    background: #fff8;
+    border-top: 1px solid var(--border);
+    background: transparent;
 }
 
 /* Reveal on scroll */
@@ -210,7 +264,7 @@ address {
     }
 }
 
-/* Мобільні дрібниці */
+/* Мобільні */
 @media (max-width:600px) {
     .title {
         font-size: 1.9rem
