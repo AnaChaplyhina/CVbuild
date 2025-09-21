@@ -1,149 +1,200 @@
 <!DOCTYPE html>
 <html lang="da">
-  <!-- Вказуємо мову сторінки (датська) для SEO та доступності:contentReference[oaicite:2]{index=2} -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Адаптивність на мобільних: відповідний viewport -->
-    <title>Anastasiia Chaplyhina – CV</title>
-    <!-- Підключення Google Fonts: Poppins та Lato для сучасної типографіки -->
+    <title>Anastasiia Chaplyhina – CV & Portfolio</title>
+
+    <!-- Шрифти (мінімалістично) -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- Підключення зовнішнього CSS-файлу -->
   </head>
   <body>
-    <header>
-      <!-- Навігація по секціях сайту -->
-      <nav>
+    <!-- індикатор прокрутки -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
         <ul>
           <li><a href="#om-mig">Om mig</a></li>
           <li><a href="#erfaring">Erfaring</a></li>
           <li><a href="#uddannelse">Uddannelse</a></li>
-          <li><a href="#tekniske-faerdigheder">Tekniske færdigheder</a></li>
-          <li><a href="#frivilligt-arbejde">Frivilligt arbejde</a></li>
+          <li><a href="#skills">Tekniske færdigheder</a></li>
+          <li><a href="#frivilligt">Frivilligt arbejde</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
-          <li class="lang-switch"><a href="#">EN</a></li>
-          <!-- Перемикач мови (англ. версія, реалізація додаватиметься пізніше) -->
+          <li class="lang-switch">
+            <a href="#" aria-label="Switch to English">EN</a>
+          </li>
         </ul>
       </nav>
-      <!-- Заголовок сайту з ім’ям -->
-      <h1>Anastasiia Chaplyhina</h1>
-      <!-- Короткий підзаголовок/опис -->
-      <p class="subtitle">Frontend-udvikler & grafisk designer</p>
+
+      <h1 class="title">Anastasiia Chaplyhina</h1>
+      <p class="subtitle">Frontend • Kommunikation • Events</p>
+      <p class="contacts">
+        <a href="mailto:chaplyhina.anastasiia@gmail.com"
+          >chaplyhina.anastasiia@gmail.com</a
+        >
+        · <a href="tel:+4555279574">+45 55 27 95 74</a> · Årslev, 5792
+      </p>
     </header>
 
     <main>
-      <!-- Секція "Про мене" -->
-      <section id="om-mig" class="reveal">
+      <section id="om-mig" class="section reveal">
         <h2>Om mig</h2>
         <p>
-          Hej! Jeg hedder Anastasiia Chaplyhina. Jeg er en front-end udvikler og
-          grafisk designer med passion for minimalistisk design og brugervenlige
-          weboplevelser. Med flere års erfaring inden for webudvikling sætter
-          jeg en ære i at skabe rene, effektive og responsive websites.
+          Med over 8 år i luftfartsbranchen (kommunikation, medieproduktion,
+          krisehåndtering og kunderelationer). Stærke problemløsningsevner,
+          strategi og ro i pressede situationer. Arbejder selvstændigt og i
+          team; høj ansvarsfølelse, tidsstyring og kritisk tænkning.
         </p>
       </section>
 
-      <!-- Секція "Досвід" -->
-      <section id="erfaring" class="reveal">
+      <section id="erfaring" class="section reveal">
         <h2>Erfaring</h2>
-        <ul>
-          <li>
-            <strong>Frontend-udvikler, ABC Tech</strong> (2020 – nu)<br />
-            <em
-              >Udvikling og vedligeholdelse af responsive webapplikationer med
-              moderne JavaScript-rammeværk. Arbejder tæt sammen med designteamet
-              for at implementere intuitive UI-løsninger.</em
-            >
-          </li>
-          <li>
-            <strong>UI/UX Designer, XYZ Studio</strong> (2018 – 2020)<br />
-            <em
-              >Designede brugervenlige grænseflader og interaktive prototyper.
-              Samarbejdede med udviklere for at sikre en konsistent
-              brugeroplevelse fra design til implementering.</em
-            >
-          </li>
-        </ul>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Kommunikationschef — Ukraine International Airlines</h3>
+            <time>aug 2017 – jan 2022</time>
+          </header>
+          <ul>
+            <li>
+              Skriftligt indhold til web & sociale medier; officielle statements
+              og interviews.
+            </li>
+            <li>
+              Krisehåndtering og kommunikationsstrategi; pressemøder og
+              presseture.
+            </li>
+            <li>
+              Samarbejde på tværs af afdelinger for bedre processer i flight
+              maintenance.
+            </li>
+          </ul>
+        </article>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Agency Relations Manager — TUI</h3>
+            <time>jan 2020 – apr 2020</time>
+          </header>
+          <ul>
+            <li>
+              Administration af onlinesystemer, partner-support,
+              loyalitetsprogrammer.
+            </li>
+            <li>
+              Forbedring af onlinesalg og rådgivning/uddannelse af bureauer.
+            </li>
+          </ul>
+        </article>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Social Media Customer Specialist — UIA</h3>
+            <time>jul 2016 – aug 2017</time>
+          </header>
+          <ul>
+            <li>Dialog med kunder og løsning af tekniske problemer.</li>
+          </ul>
+        </article>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Gartneriarbejder — Vikar Bureau</h3>
+            <time>maj 2024 – aug 2024</time>
+          </header>
+          <ul>
+            <li>Plantning og pakning af blomster.</li>
+          </ul>
+        </article>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Lagerspecialist — Lampemestern A/S</h3>
+            <time>okt 2022 – feb 2024</time>
+          </header>
+          <ul>
+            <li>
+              Modtagelse/inspektion af varer, revision, truckkørsel, pakning.
+            </li>
+          </ul>
+        </article>
+
+        <article class="job card reveal-item">
+          <header>
+            <h3>Servitrice / Køkkenassistent — Hotel Ringkøbing</h3>
+            <time>maj 2022 – okt 2022</time>
+          </header>
+          <ul>
+            <li>
+              Gæstebetjening, ordrer, bar, tilberedning og mise en place
+              (særligt fisk).
+            </li>
+          </ul>
+        </article>
       </section>
 
-      <!-- Секція "Освіта" -->
-      <section id="uddannelse" class="reveal">
+      <section id="uddannelse" class="section reveal">
         <h2>Uddannelse</h2>
-        <ul>
+        <ul class="reveal-item">
           <li>
-            <strong
-              >Bachelor i Softwareudvikling, IT-Universitetet i
-              København</strong
-            >
-            (2015 – 2018)
+            Oversætter (kandidat) — Kyiv National Linguistic University
+            (2014–2016)
           </li>
           <li>
-            <strong>Certificering i UX/UI Design</strong> – online kursus (2019)
+            Teknisk oversætter (bachelor) — Kyiv National Transport University
+            (2011–2014)
           </li>
+          <li>Danskuddannelse for voksne udlændinge — UCPLUS (2022–2023)</li>
+          <li>Fullstack-udvikling — GoIT (2024–2025)</li>
         </ul>
       </section>
 
-      <!-- Секція "Технічні навички" -->
-      <section id="tekniske-faerdigheder" class="reveal">
+      <section id="skills" class="section reveal">
         <h2>Tekniske færdigheder</h2>
-        <ul>
-          <li>HTML5, CSS3, JavaScript (ES6+)</li>
-          <li>React, Vue.js</li>
-          <li>Responsive webdesign, Mobile-first principper</li>
-          <li>Adobe Photoshop, Figma</li>
-          <li>Git, Agile udvikling</li>
+        <ul class="skills-grid">
+          <li class="reveal-item">JavaScript, HTML, CSS, Node.js</li>
+          <li class="reveal-item">Figma, Canva</li>
+          <li class="reveal-item">Avid Media Composer</li>
+          <li class="reveal-item">Git, GitHub</li>
+          <li class="reveal-item">AWS, Google Cloud</li>
+          <li class="reveal-item">AI: ChatGPT, CopyAI</li>
         </ul>
       </section>
 
-      <!-- Секція "Волонтерство" -->
-      <section id="frivilligt-arbejde" class="reveal">
+      <section id="frivilligt" class="section reveal">
         <h2>Frivilligt arbejde</h2>
-        <ul>
-          <li>
-            <strong>Frivillig mentor, Girls Who Code Denmark</strong> (2020 –
-            2021)<br />
-            <em
-              >Vejledte unge piger i grundlæggende programmering og
-              webudvikling, for at inspirere næste generation af kvindelige
-              udviklere.</em
-            >
-          </li>
-          <li>
-            <strong>Frivillig webdesigner, Nonprofit XYZ</strong> (2019)<br />
-            <em
-              >Hjalp en velgørenhedsorganisation med at skabe en enkel,
-              informativ hjemmeside i et pastelfarvet tema, der afspejler
-              organisationens værdier.</em
-            >
-          </li>
-        </ul>
+        <p class="reveal-item">
+          Kommunikationskonsulent (mar 2022 – mar 2024): Hjælp til ukrainske
+          familier i DK og UA med humanitær støtte og socialisering.
+        </p>
+        <p class="reveal-item">
+          Røde Kors (mar 2022 – okt 2023): Arrangør & oversætter til events for
+          ukrainere.
+        </p>
       </section>
 
-      <!-- Секція "Контактна інформація" -->
-      <section id="kontakt" class="reveal">
+      <section id="kontakt" class="section reveal">
         <h2>Kontakt</h2>
-        <p>
-          <strong>Email:</strong>
-          <a href="mailto:anastasiia@example.com">anastasiia@example.com</a
+        <address class="contact card reveal-item">
+          Email:
+          <a href="mailto:chaplyhina.anastasiia@gmail.com"
+            >chaplyhina.anastasiia@gmail.com</a
           ><br />
-          <strong>Telefon:</strong> <a href="tel:+4512345678">+45 12 34 56 78</a
-          ><br />
-          <strong>LinkedIn:</strong>
-          <a
-            href="https://linkedin.com/in/anastasiia-chaplyhina"
-            target="_blank"
-            rel="noopener"
-            >linkedin.com/in/anastasiia-chaplyhina</a
-          >
-        </p>
+          Telefon: <a href="tel:+4555279574">+45 55 27 95 74</a><br />
+          Adresse: 5792, Årslev
+        </address>
       </section>
     </main>
 
+    <footer class="site-footer">
+      © <span id="year"></span> Anastasiia Chaplyhina
+    </footer>
+
     <script src="main.js"></script>
-    <!-- Скрипти (наприклад, для додавання інтерактивності) -->
   </body>
 </html>

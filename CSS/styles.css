@@ -1,230 +1,201 @@
-/* === Основні стилі та змінні кольорів (пастельна палітра) === */
+/* ===== Палiтра (пастель) і шрифти ===== */
 :root {
-    --color-pink: #fadadd;
-    /* пастельний рожевий (header, основний акцент) */
-    --color-mint: #daffe7;
-    /* пастельний м'ятний (використовується для підсвічування, фон контакту) */
-    --color-cream: #fff5da;
-    /* кремовий (світлий фоновий колір сторінки) */
-    --font-main: 'Lato', sans-serif;
-    --font-accent: 'Poppins', sans-serif;
+    --pink: #FADADD;
+    --mint: #DAFFE7;
+    --cream: #FFF5DA;
+    --ink: #2f2f2f;
+    --muted: #626262;
+    --card: #ffffffcc;
 }
 
-/* Базові стилі сторінки */
-html,
+/* Базові */
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth
+}
+
 body {
     margin: 0;
-    padding: 0;
-}
-
-body {
-    background-color: var(--color-cream);
-    /* м'який кремовий фон для всього сайту */
-    color: #333;
-    /* основний колір тексту (темно-сірий для хорошої контрастності) */
-    font-family: var(--font-main);
-    /* основний шрифт для тексту (Lato) */
+    color: var(--ink);
+    background: var(--cream);
+    font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
 }
 
-h1,
-h2 {
-    font-family: var(--font-accent);
-    /* акцентний шрифт для заголовків (Poppins) */
-    margin-top: 0;
+/* Прогрес прокрутки */
+#scroll-progress {
+    position: fixed;
+    inset: 0 auto auto 0;
+    height: 4px;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(var(--scroll, 0));
+    background: linear-gradient(90deg, var(--pink), var(--mint));
+    z-index: 1000;
+    pointer-events: none;
 }
 
-h1 {
-    font-size: 2.5em;
-    font-weight: 600;
-}
-
-h2 {
-    font-size: 1.5em;
-    font-weight: 500;
-    margin-bottom: 0.5em;
-    border-bottom: 2px solid var(--color-pink);
-    /* підкреслення заголовків секцій пастельним кольором */
-}
-
-/* Стилі шапки сайту */
-header {
-    background-color: var(--color-pink);
-    /* пастельний рожевий фон шапки */
+/* Header */
+.site-header {
+    background: var(--pink);
     text-align: center;
-    /* центроване вирівнювання вмісту шапки */
-    padding: 40px 20px;
+    padding: 48px 16px 28px;
 }
 
-header h1 {
-    color: #333;
-}
-
-header .subtitle {
-    font-size: 1.2em;
-    color: #555;
-    /* трохи світліший текст для підзаголовка */
-    margin-bottom: 0;
-}
-
-/* Навігаційне меню */
-nav ul {
+.site-nav ul {
     list-style: none;
-    margin: 0;
+    margin: 0 0 16px;
     padding: 0;
     display: flex;
+    gap: .75rem;
     justify-content: center;
-    /* горизонтальне меню, елементи вирівняні по центру */
     flex-wrap: wrap;
-    /* дозволити перенесення пунктів меню на новий рядок при вузькому екрані */
-    gap: 1em;
 }
 
-nav li {
-    /* стилі пунктів меню можуть бути додані за потреби */
-}
-
-nav a {
+.site-nav a {
     text-decoration: none;
-    color: #333;
-    /* темний колір посилань на пастельному фоні для контрасту */
-    font-weight: 500;
-    padding: 5px 8px;
-    border-radius: 4px;
+    color: var(--ink);
+    padding: .35rem .6rem;
+    border-radius: .5rem;
+    transition: background .2s ease;
 }
 
-nav a:hover,
-nav a:focus {
-    background-color: var(--color-mint);
-    /* підсвічування пункту меню м'ятним при наведенні */
+.site-nav a:hover,
+.site-nav a.active {
+    background: var(--mint);
     text-decoration: underline;
 }
 
-/* Основні секції контенту */
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.4rem;
+    margin: 6px 0 4px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin: 0 0 6px
+}
+
+.contacts a {
+    color: inherit
+}
+
+/* Layout */
 main {
-    max-width: 800px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 28px 16px 64px;
 }
 
-section {
-    margin-bottom: 40px;
+.section {
+    margin: 36px 0;
 }
 
-section ul {
-    padding-left: 1.2em;
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--pink);
+    padding-bottom: .35rem;
+    margin: 0 0 16px;
 }
 
-section ul li {
-    margin-bottom: 10px;
+.card {
+    background: var(--card);
+    backdrop-filter: saturate(120%) blur(2px);
+    border: 1px solid #00000010;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 14px 0;
+    box-shadow: 0 2px 10px #0000000b;
 }
 
-section p,
-section em {
-    font-family: var(--font-main);
+.job header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
 }
 
-/* Секція "Kontakt" – додаткове форматування */
-#kontakt {
-    background-color: var(--color-mint);
-    /* світло-м'ятний фон для виділення блоку контактів */
-    padding: 20px;
-    border-radius: 4px;
+.job time {
+    color: var(--muted);
+    font-size: .95rem;
 }
 
-#kontakt a {
-    color: #333;
-    font-weight: bold;
+/* Сітка навичок */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#kontakt a:hover {
-    text-decoration: none;
+.skills-grid li {
+    padding: 10px 12px;
+    border: 1px dashed #0000001f;
+    border-radius: 10px;
 }
 
-/* Адаптивність: стилі для мобільних пристроїв */
-@media (max-width: 600px) {
-    header {
-        padding: 30px 15px;
-    }
-
-    header h1 {
-        font-size: 1.8em;
-    }
-
-    header .subtitle {
-        font-size: 1em;
-    }
-
-    nav ul {
-        flex-direction: column;
-        /* вертикальне розташування пунктів меню на вузьких екранах */
-        align-items: center;
-    }
-
-    nav a {
-        font-size: 1em;
-        padding: 8px;
-    }
-
-    main {
-        padding: 15px;
-    }
-
-    h2 {
-        font-size: 1.3em;
-    }
+/* Контакти */
+address {
+    font-style: normal
 }
 
-/* Плавна прокрутка при кліку на навігаційні посилання */
-html {
-    scroll-behavior: smooth;
-    /* ввімкнено плавний скролінг по якорях:contentReference[oaicite:3]{index=3} */
+.site-footer {
+    text-align: center;
+    padding: 18px 12px;
+    color: var(--muted);
+    border-top: 1px solid #00000012;
+    background: #fff8;
 }
 
-/* --- Reveal on scroll --- */
+/* Reveal on scroll */
 .reveal {
     opacity: 0;
     transform: translateY(18px);
-    transition:
-        opacity 600ms ease,
-        transform 600ms ease;
+    transition: opacity .6s ease, transform .6s ease;
     will-change: opacity, transform;
 }
 
 .reveal.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
-/* Легка “сходинка” для елементів усередині секції */
 .reveal .reveal-item {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 500ms ease, transform 500ms ease;
+    transition: opacity .5s ease, transform .5s ease;
 }
 
 .reveal.is-visible .reveal-item {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 .reveal.is-visible .reveal-item:nth-child(1) {
-    transition-delay: 80ms;
+    transition-delay: 80ms
 }
 
 .reveal.is-visible .reveal-item:nth-child(2) {
-    transition-delay: 160ms;
+    transition-delay: 160ms
 }
 
 .reveal.is-visible .reveal-item:nth-child(3) {
-    transition-delay: 240ms;
+    transition-delay: 240ms
 }
 
 .reveal.is-visible .reveal-item:nth-child(4) {
-    transition-delay: 320ms;
+    transition-delay: 320ms
 }
 
-/* Якщо користувач обрав зменшену анімацію – показуємо одразу */
+/* Аксесибіліті: повага до reduce motion */
 @media (prefers-reduced-motion: reduce) {
 
     .reveal,
@@ -233,9 +204,20 @@ html {
         opacity: 1 !important;
         transform: none !important;
     }
+
+    #scroll-progress {
+        transition: none
+    }
 }
 
-nav a.active {
-    text-decoration: underline;
-    background: var(--color-mint);
+/* Мобільні дрібниці */
+@media (max-width:600px) {
+    .title {
+        font-size: 1.9rem
+    }
+
+    .job header {
+        flex-direction: column;
+        align-items: flex-start
+    }
 }
