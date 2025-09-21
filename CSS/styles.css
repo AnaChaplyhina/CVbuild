@@ -1,112 +1,241 @@
-/* Стандартні стилі */
-* {
+/* === Основні стилі та змінні кольорів (пастельна палітра) === */
+:root {
+    --color-pink: #fadadd;
+    /* пастельний рожевий (header, основний акцент) */
+    --color-mint: #daffe7;
+    /* пастельний м'ятний (використовується для підсвічування, фон контакту) */
+    --color-cream: #fff5da;
+    /* кремовий (світлий фоновий колір сторінки) */
+    --font-main: 'Lato', sans-serif;
+    --font-accent: 'Poppins', sans-serif;
+}
+
+/* Базові стилі сторінки */
+html,
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: var(--color-cream);
+    /* м'який кремовий фон для всього сайту */
     color: #333;
+    /* основний колір тексту (темно-сірий для хорошої контрастності) */
+    font-family: var(--font-main);
+    /* основний шрифт для тексту (Lato) */
     line-height: 1.6;
 }
 
-.container {
-    max-width: 1200px;
+h1,
+h2 {
+    font-family: var(--font-accent);
+    /* акцентний шрифт для заголовків (Poppins) */
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid var(--color-pink);
+    /* підкреслення заголовків секцій пастельним кольором */
+}
+
+/* Стилі шапки сайту */
+header {
+    background-color: var(--color-pink);
+    /* пастельний рожевий фон шапки */
+    text-align: center;
+    /* центроване вирівнювання вмісту шапки */
+    padding: 40px 20px;
+}
+
+header h1 {
+    color: #333;
+}
+
+header .subtitle {
+    font-size: 1.2em;
+    color: #555;
+    /* трохи світліший текст для підзаголовка */
+    margin-bottom: 0;
+}
+
+/* Навігаційне меню */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    /* горизонтальне меню, елементи вирівняні по центру */
+    flex-wrap: wrap;
+    /* дозволити перенесення пунктів меню на новий рядок при вузькому екрані */
+    gap: 1em;
+}
+
+nav li {
+    /* стилі пунктів меню можуть бути додані за потреби */
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    /* темний колір посилань на пастельному фоні для контрасту */
+    font-weight: 500;
+    padding: 5px 8px;
+    border-radius: 4px;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: var(--color-mint);
+    /* підсвічування пункту меню м'ятним при наведенні */
+    text-decoration: underline;
+}
+
+/* Основні секції контенту */
+main {
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-h1,
-h2,
-h3 {
-    color: #4e75ff;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 20px;
-}
-
-ul {
-    list-style-type: none;
-    margin: 10px 0;
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 10px;
-    padding-left: 10px;
-    position: relative;
-}
-
-ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #4e75ff;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header nav ul {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-header nav ul li a:hover {
-    color: #4e75ff;
-}
-
-main {
-    background-color: #fff;
-    padding: 40px 0;
-    border-radius: 8px;
+section {
     margin-bottom: 40px;
 }
 
-.job,
-.container {
-    margin-bottom: 40px;
+section ul {
+    padding-left: 1.2em;
 }
 
-footer {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #333;
-    color: #fff;
+section ul li {
+    margin-bottom: 10px;
 }
 
-footer a {
-    color: #4e75ff;
+section p,
+section em {
+    font-family: var(--font-main);
+}
+
+/* Секція "Kontakt" – додаткове форматування */
+#kontakt {
+    background-color: var(--color-mint);
+    /* світло-м'ятний фон для виділення блоку контактів */
+    padding: 20px;
+    border-radius: 4px;
+}
+
+#kontakt a {
+    color: #333;
+    font-weight: bold;
+}
+
+#kontakt a:hover {
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-footer a:hover {
-    color: #fff;
-}
-
-@media (max-width: 768px) {
-    header nav ul {
-        flex-direction: column;
+/* Адаптивність: стилі для мобільних пристроїв */
+@media (max-width: 600px) {
+    header {
+        padding: 30px 15px;
     }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    header .subtitle {
+        font-size: 1em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        /* вертикальне розташування пунктів меню на вузьких екранах */
+        align-items: center;
+    }
+
+    nav a {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+}
+
+/* Плавна прокрутка при кліку на навігаційні посилання */
+html {
+    scroll-behavior: smooth;
+    /* ввімкнено плавний скролінг по якорях:contentReference[oaicite:3]{index=3} */
+}
+
+/* --- Reveal on scroll --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 600ms ease,
+        transform 600ms ease;
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Легка “сходинка” для елементів усередині секції */
+.reveal .reveal-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.reveal.is-visible .reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.is-visible .reveal-item:nth-child(1) {
+    transition-delay: 80ms;
+}
+
+.reveal.is-visible .reveal-item:nth-child(2) {
+    transition-delay: 160ms;
+}
+
+.reveal.is-visible .reveal-item:nth-child(3) {
+    transition-delay: 240ms;
+}
+
+.reveal.is-visible .reveal-item:nth-child(4) {
+    transition-delay: 320ms;
+}
+
+/* Якщо користувач обрав зменшену анімацію – показуємо одразу */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal,
+    .reveal .reveal-item {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+nav a.active {
+    text-decoration: underline;
+    background: var(--color-mint);
 }
