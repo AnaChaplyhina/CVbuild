@@ -275,3 +275,10 @@ address {
         align-items: flex-start
     }
 }
+
+/* Fallback: якщо JS не підвантажився, все одразу видно */
+.no-js .reveal,
+noscript .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}

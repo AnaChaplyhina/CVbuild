@@ -66,5 +66,27 @@
 // ---------- Плавна навігація по якорях ----------
 document.querySelectorAll('a[href^="#"]').forE
 
+// якщо JS працює — знімаємо клас no-js, щоб включились анімації
+document.documentElement.classList.remove('no-js');
+
+// Reveal-on-scroll (мінімальний варіант)
+(function setupReveal() {
+  const revealEls = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  revealEls.forEach(el => io.observe(el));
+})();
+
 
 
