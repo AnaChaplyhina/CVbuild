@@ -425,3 +425,36 @@ noscript .reveal {
         bottom: 8px;
     }
 }
+
+/* Fallback: якщо JS не підвантажився — показати секції */
+.no-js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* --- AI Chat: дрібні доповнення --- */
+.ai-chat__actions {
+    display: flex;
+    gap: 6px;
+}
+
+.ai-chat__mini,
+.ai-chat__close {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+#ai-chat.collapsed {
+    max-height: 56px;
+    overflow: hidden;
+}
+
+#ai-chat.collapsed .ai-chat__log,
+#ai-chat.collapsed .ai-chat__suggests,
+#ai-chat.collapsed .ai-chat__form {
+    display: none !important;
+}

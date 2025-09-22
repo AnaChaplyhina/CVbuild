@@ -34,9 +34,24 @@
   >
     <header class="ai-chat__header">
       <h2 id="ai-chat-title">Chat med Anastasiias CV-bot</h2>
-      <button id="ai-chat-close" class="ai-chat__close" aria-label="Close chat">
-        ✕
-      </button>
+      <div class="ai-chat__actions">
+        <button
+          id="ai-chat-minimize"
+          class="ai-chat__mini"
+          aria-label="Minimize chat"
+          title="Minimize"
+        >
+          ▁
+        </button>
+        <button
+          id="ai-chat-close"
+          class="ai-chat__close"
+          aria-label="Close chat"
+          title="Close"
+        >
+          ✕
+        </button>
+      </div>
     </header>
 
     <div
@@ -47,7 +62,6 @@
     ></div>
 
     <div class="ai-chat__suggests" id="ai-chat-suggests">
-      <!-- підказки-кнопки -->
       <button data-q="Fortæl om din erfaring hos UIA">Erfaring hos UIA</button>
       <button data-q="Hvilke tekniske færdigheder har du?">
         Tekniske færdigheder
@@ -56,7 +70,13 @@
       <button data-q="Fortæl om frivilligt arbejde">Frivilligt arbejde</button>
     </div>
 
-    <form id="ai-chat-form" class="ai-chat__form" autocomplete="off">
+    <!-- важливо: action запобігає навігації навіть без JS; залишаємо submit для Enter -->
+    <form
+      id="ai-chat-form"
+      class="ai-chat__form"
+      autocomplete="off"
+      action="javascript:void(0)"
+    >
       <label class="visually-hidden" for="ai-chat-input"
         >Skriv dit spørgsmål</label
       >

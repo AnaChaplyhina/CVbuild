@@ -1,4 +1,8 @@
 // ---------- ТЕМИ: Pastel / Dark з пам'яттю ----------
+
+// Увімкнений JS → прибираємо no-js (видимість секцій навіть при збоях)
+document.documentElement.classList.remove('no-js');
+
 (function themeInit(){
   const html = document.documentElement;
   const btn = document.getElementById('theme-toggle');
@@ -247,5 +251,145 @@ document.documentElement.classList.remove('no-js');
     e.preventDefault();
     cons
 
+// ==== AI CV Chat ====
+(function aiChat(){
+  const toggle = document.getElementById('ai-chat-toggle');
+  const pane   = document.getElementById('ai-chat');
+  const btnMin = document.getElementById('ai-chat-minimize');
+  const btnClose = document.getElementById('ai-chat-close');
+  const form   = document.getElementById('ai-chat-form');
+  const input  = document.getElementById('ai-chat-input');
+  const log    = document.getElementById('ai-chat-log');
+  const suggests = document.getElementById('ai-chat-suggests');
 
+  if (!toggle || !pane) return;
 
+  // ——— helpers
+  const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'').replace(/[^a-z0-9æøåäöü \-]/gi,' ').replace(/\s+/g,' ').trim();
+
+  function say(text, who='bot'){
+    const msg = document.createElement('div');
+    msg.className = `ai-msg ai-msg--${who}`;
+    msg.innerHTML = text;
+    log.appendChild(msg);
+    log.scrollTop = log.scrollHeight;
+  }
+  function think(on=true){
+    const id = 'ai-typing';
+    let el = document.getElementById(id);
+    if (on && !el){
+      el = document.createElement('div');
+      el.id = id; el.className='ai-msg ai-msg--bot ai-typing';
+      el.textContent = 'Skriver…';
+      log.appendChild(el);
+    } else if (!on && el){ el.remove(); }
+    log.scrollTop = log.scrollHeight;
+  }
+
+  // ——— KB
+  const KB = [
+    { t:['uia','ukraine international airlines','kommunikationschef','krise','presse','medie'],
+      a:`<strong>Kommunikationschef — Ukraine International Airlines (2017–2022)</strong><br>
+         • Officielle statements, interviews, web/SoMe-indhold.<br>
+         • Krisehåndtering, strategi, pressemøder/presseture.<br>
+         • Tværfagligt samarbejde for bedre processer (flight maintenance).` },
+    { t:['tui','agency relations','loyalitetsprogram','online'],
+      a:`<strong>Agency Relations Manager — TUI (2020)</strong><br>
+         • Onlinesystemer, partner-support, rådgivning/uddannelse, loyalitetsprogrammer.` },
+    { t:['social media','kundeservice','support'],
+      a:`<strong>Social Media Customer Specialist — UIA (2016–2017)</strong><br>
+         • Kommunikation med kunder og løsning af tekniske problemer.` },
+    { t:['lampemestern','lager','truck','revision'],
+      a:`<strong>Lagerspecialist — Lampemestern A/S (2022–2024)</strong><br>
+         • Modtagelse/inspektion, revision, truckkørsel, pakning.` },
+    { t:['hotel ringkøbing','servitrice','køkken','fisk'],
+      a:`<strong>Servitrice / Køkkenassistent — Hotel Ringkøbing (2022)</strong><br>
+         • Gæstebetjening, bar, ordrer. Mise en place, fiskeretter.` },
+    { t:['gartneri','vikar','blomster'],
+      a:`<strong>Gartneriarbejder — Vikar Bureau (2024)</strong><br>
+         • Plantning og pakning af blomster.` },
+    { t:['uddannelse','education','goit','ucplus','bachelor','kandidat'],
+      a:`<strong>Uddannelse</strong><br>
+         • Kandidat: Kyiv National Linguistic University (2014–2016).<br>
+         • Bachelor: Kyiv National Transport University (2011–2014).<br>
+         • Danskuddannelse — UCPLUS (2022–2023).<br>
+         • Fullstack — GoIT (2024–2025).` },
+    { t:['skills','færdigheder','tech','stack','værktøjer'],
+      a:`<strong>Tekniske færdigheder</strong><br>
+         • JavaScript, HTML, CSS, Node.js; Git/GitHub.<br>
+         • Figma, Canva; Avid Media Composer.<br>
+         • AWS, Google Cloud; AI: ChatGPT, CopyAI.` },
+    { t:['volunteer','frivilligt','røde kors','humanitær'],
+      a:`<strong>Frivilligt arbejde</strong><br>
+         • Kommunikationskonsulent (2022–2024) — støtte til ukrainske familier i DK/UA.<br>
+         • Røde Kors (2022–2023) — events og oversættelse.` },
+    { t:['sprog','languages','danish','english','ukrainian','russian','german'],
+      a:`<strong>Sprog</strong><br>
+         • Ukrainsk (C2), Engelsk (C1), Dansk (B1), Russisk (C2), Tysk (A1).` },
+  ];
+
+  function retrieve(q){
+    const s = norm(q);
+    if (!s) return null;
+    const tokens = new Set(s.split(' ').filter(Boolean));
+    let best = null, scoreBest = 0;
+    for (const item of KB){
+      let sc = 0; const hay = item.t.join(' ');
+      for (const tok of tokens){ if (hay.includes(tok)) sc++; }
+      if (/(uia|ukraine|tui|ringkøbing|lampemestern|røde kors|skills|uddannelse)/.test(s)) sc += 2;
+      if (sc > scoreBest){ scoreBest = sc; best = item; }
+    }
+    return scoreBest ? best : null;
+  }
+
+  async function answer(q){
+    const n = norm(q);
+    if (!n) return 'Skriv et spørgsmål om erfaring, færdigheder, uddannelse eller frivilligt arbejde 🙂';
+    if (/^(hej|hello|hi|hey)\b/.test(n)){
+      return 'Hej! Spørg fx: "Erfaring hos UIA", "Hvilke tekniske færdigheder har du?" eller "Fortæl om frivilligt arbejde".';
+    }
+    const found = retrieve(q);
+    if (found) return found.a;
+    return 'Det har jeg ikke helt fanget endnu. Prøv at spørge om erfaring, færdigheder, uddannelse eller frivilligt arbejde.';
+  }
+
+  // ——— UI
+  function openChat(){
+    pane.hidden = false;
+    pane.classList.remove('collapsed');
+    toggle.setAttribute('aria-expanded','true');
+    if (!log.dataset.init){
+      say('Hej! Jeg er din CV-bot. Spørg mig om erfaring, færdigheder, uddannelse eller frivilligt arbejde (da/en).');
+      log.dataset.init = '1';
+    }
+    setTimeout(()=>input?.focus(), 0);
+  }
+  function closeChat(){ pane.hidden = true; toggle.setAttribute('aria-expanded','false'); toggle.focus(); }
+  function toggleMinimize(){ pane.classList.toggle('collapsed'); }
+
+  toggle.addEventListener('click', () => (pane.hidden ? openChat() : closeChat()));
+  btnClose?.addEventListener('click', closeChat);
+  btnMin?.addEventListener('click', toggleMinimize);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !pane.hidden) closeChat(); });
+
+  // Гарантовано блокуємо дефолтну відправку (щоб не було ?q=…)
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const q = input.value.trim();
+    if (!q) return;
+    say(q, 'user');
+    input.value = '';
+    think(true);
+    const a = await answer(q);
+    think(false);
+    say(a, 'bot');
+  });
+
+  suggests?.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-q]');
+    if (!b) return;
+    input.value = b.dataset.q;
+    form.dispatchEvent(new Event('submit', { cancelable:true, bubbles:true }));
+  });
+})();
