@@ -27,6 +27,7 @@
           <li><a href="#uddannelse">Uddannelse</a></li>
           <li><a href="#skills">Tekniske færdigheder</a></li>
           <li><a href="#frivilligt">Frivilligt arbejde</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
           <li class="lang-switch">
             <a href="#" aria-label="Switch to English">EN</a>
@@ -52,6 +53,16 @@
           >chaplyhina.anastasiia@gmail.com</a
         >
         · <a href="tel:+4555279574">+45 55 27 95 74</a> · Årslev, 5792
+      </p>
+      <p>
+        <button
+          id="btn-print"
+          class="btn-print"
+          type="button"
+          aria-label="Download PDF"
+        >
+          ⬇ Download PDF
+        </button>
       </p>
     </header>
 
@@ -195,6 +206,43 @@
           Røde Kors (mar 2022 – okt 2023): Arrangør & oversætter til events for
           ukrainere.
         </p>
+      </section>
+
+      <!-- Portfolio -->
+      <section id="portfolio" class="section reveal">
+        <h2>Portfolio</h2>
+
+        <!-- Панель керування -->
+        <div class="portfolio-controls card">
+          <div class="controls-row">
+            <label for="portfolio-search" class="visually-hidden"
+              >Search projects</label
+            >
+            <input
+              id="portfolio-search"
+              type="search"
+              placeholder="Search by title, description, stack…"
+            />
+            <select id="portfolio-sort" aria-label="Sort projects">
+              <option value="new">Newest first</option>
+              <option value="old">Oldest first</option>
+              <option value="az">A → Z</option>
+              <option value="za">Z → A</option>
+            </select>
+          </div>
+          <div
+            class="controls-row tags"
+            id="portfolio-tags"
+            aria-label="Filter by tags"
+          >
+            <!-- Теги згенерує JS -->
+          </div>
+        </div>
+
+        <!-- Сітка проектів -->
+        <div id="portfolio-grid" class="portfolio-grid">
+          <!-- Картки намалює JS -->
+        </div>
       </section>
 
       <!-- Kontakt -->

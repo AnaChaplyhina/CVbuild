@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Flight Delay Dashboard",
+    "year": 2024,
+    "description": "Dashboard for airline ops: delays, reasons, SLAs. Clean UI, fast filtering.",
+    "stack": ["JavaScript", "HTML", "CSS"],
+    "tags": ["frontend", "dashboard", "data"],
+    "links": [{ "label": "Demo", "url": "#" }, { "label": "Code", "url": "#" }]
+  },
+  {
+    "title": "Event Landing (Conference)",
+    "year": 2023,
+    "description": "Minimalist landing with schedule, speakers, and ticket CTA.",
+    "stack": ["HTML", "CSS"],
+    "tags": ["landing", "marketing", "accessibility"],
+    "links": [{ "label": "Preview", "url": "#" }]
+  },
+  {
+    "title": "Image Gallery App",
+    "year": 2024,
+    "description": "Search & lightbox with keyboard nav, lazy images, SimpleLightbox.",
+    "stack": ["JavaScript", "HTML", "CSS"],
+    "tags": ["frontend", "gallery", "ux"],
+    "links": [{ "label": "Demo", "url": "#" }]
+  }
+]

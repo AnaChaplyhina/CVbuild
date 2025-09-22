@@ -308,3 +308,148 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 
+// ==================== Portfolio (filters + search + sort) ====================
+(function setupPortfolio(){
+  const grid   = document.getElementById('portfolio-grid');
+  const tagsEl = document.getElementById('portfolio-tags');
+  const qEl    = document.getElementById('portfolio-search');
+  const sortEl = document.getElementById('portfolio-sort');
+
+  if (!grid) return;
+
+  // Фолбек-дані, якщо не знайдеться projects.json
+  const fallbackProjects = [
+    {
+      title: "Flight Delay Dashboard",
+      year: 2024,
+      description: "Dashboard for airline ops: delays, reasons, SLAs. Clean UI, fast filtering.",
+      stack: ["JavaScript","HTML","CSS"],
+      tags: ["frontend","dashboard","data"],
+      links: [{label:"Demo", url:"#"}, {label:"Code", url:"#"}]
+    },
+    {
+      title: "Event Landing (Conference)",
+      year: 2023,
+      description: "Minimalist landing with schedule, speakers, and ticket CTA.",
+      stack: ["HTML","CSS"],
+      tags: ["landing","marketing","accessibility"],
+      links: [{label:"Preview", url:"#"}]
+    },
+    {
+      title: "Image Gallery App",
+      year: 2024,
+      description: "Search & lightbox with keyboard nav, lazy images, SimpleLightbox.",
+      stack: ["JavaScript","HTML","CSS"],
+      tags: ["frontend","gallery","ux"],
+      links: [{label:"Demo", url:"#"}]
+    }
+  ];
+
+  let projects = [];
+  let activeTags = new Set();
+
+  // завантажуємо json (якщо впаде — беремо фолбек)
+  fetch('projects.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => { projects = Array.isArray(data) ? data : fallbackProjects; init(); })
+    .catch(() => { projects = fallbackProjects; init(); });
+
+  function init(){
+    buildTags();
+    render();
+    bind();
+  }
+
+  function uniqueTags(list){
+    const set = new Set();
+    list.forEach(p => (p.tags||[]).forEach(t => set.add(t)));
+    return [...set].sort((a,b)=>a.localeCompare(b));
+  }
+
+  function buildTags(){
+    const all = uniqueTags(projects);
+    tagsEl.innerHTML = '';
+    all.forEach(t => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tag';
+      b.textContent = t;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', () => {
+        if (activeTags.has(t)) { activeTags.delete(t); b.classList.remove('active'); b.setAttribute('aria-pressed','false'); }
+        else { activeTags.add(t); b.classList.add('active'); b.setAttribute('aria-pressed','true'); }
+        render();
+      });
+      tagsEl.appendChild(b);
+    });
+  }
+
+  function matchesQuery(p, q){
+    if (!q) return true;
+    const blob = `${p.title} ${p.description||''} ${(p.stack||[]).join(' ')} ${(p.tags||[]).join(' ')}`.toLowerCase();
+    return blob.includes(q.toLowerCase());
+  }
+
+  function matchesTags(p){
+    if (activeTags.size === 0) return true;
+    const ptags = new Set(p.tags || []);
+    for (const t of activeTags) if (!ptags.has(t)) return false;
+    return true;
+  }
+
+  function sortProjects(list, mode){
+    const arr = [...list];
+    switch(mode){
+      case 'old': return arr.sort((a,b)=>(a.year||0)-(b.year||0));
+      case 'az' : return arr.sort((a,b)=>a.title.localeCompare(b.title));
+      case 'za' : return arr.sort((a,b)=>b.title.localeCompare(a.title));
+      case 'new':
+      default:   return arr.sort((a,b)=>(b.year||0)-(a.year||0));
+    }
+  }
+
+  function cardTemplate(p){
+    const year = p.year ? `<span class="meta">Year: ${p.year}</span>` : '';
+    const stack = (p.stack||[]).map(s=>`<span class="badge">${s}</span>`).join(' ');
+    const tags  = (p.tags||[]).map(s=>`<span class="badge">${s}</span>`).join(' ');
+    const links = (p.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(' · ');
+
+    // Якщо додаси зображення: <img src="..." loading="lazy" alt="Preview of ${p.title}">
+    return `
+      <article class="project reveal-item">
+        <h3>${p.title}</h3>
+        ${year}
+        <p>${p.description || ''}</p>
+        <div class="stack">${stack}</div>
+        <div class="stack">${tags}</div>
+        <div class="links">${links}</div>
+      </article>
+    `;
+  }
+
+  function render(){
+    const q = qEl?.value?.trim() || '';
+    const mode = sortEl?.value || 'new';
+    const filtered = projects.filter(p => matchesQuery(p, q) && matchesTags(p));
+    const sorted = sortProjects(filtered, mode);
+    grid.innerHTML = sorted.map(cardTemplate).join('') || `<p class="meta">No projects match filters.</p>`;
+    // щоб красиво “випливали” додані картки
+    grid.closest('.section')?.classList.add('is-visible');
+  }
+
+  function bind(){
+    let debounce;
+    qEl?.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = setTimeout(render, 150);
+    });
+    sortEl?.addEventListener('change', render);
+  }
+})();
+
+// ==================== Print button ====================
+(function setupPrint(){
+  const btn = document.getElementById('btn-print');
+  btn?.addEventListener('click', () => window.print());
+})();
+
