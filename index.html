@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="da" data-theme="auto">
+<html lang="da" class="no-js" data-theme="auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,86 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600&display=swap"
       rel="stylesheet"
     />
+    <!-- УВАГА: папка стилів має називатись саме "CSS" (з великої літери) -->
     <link rel="stylesheet" href="CSS/styles.css" />
-    <!-- Опціонально: колір тулбара у мобільних браузерах оновлюємо через JS -->
     <meta name="theme-color" content="#FADADD" id="meta-theme-color" />
   </head>
-
-  <!-- AI Chatbot -->
-  <button
-    id="ai-chat-toggle"
-    aria-expanded="false"
-    aria-controls="ai-chat"
-    aria-label="Open career chatbot"
-  >
-    💬
-  </button>
-
-  <aside
-    id="ai-chat"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="ai-chat-title"
-    hidden
-  >
-    <header class="ai-chat__header">
-      <h2 id="ai-chat-title">Chat med Anastasiias CV-bot</h2>
-      <div class="ai-chat__actions">
-        <button
-          id="ai-chat-minimize"
-          class="ai-chat__mini"
-          aria-label="Minimize chat"
-          title="Minimize"
-        >
-          ▁
-        </button>
-        <button
-          id="ai-chat-close"
-          class="ai-chat__close"
-          aria-label="Close chat"
-          title="Close"
-        >
-          ✕
-        </button>
-      </div>
-    </header>
-
-    <div
-      id="ai-chat-log"
-      class="ai-chat__log"
-      aria-live="polite"
-      aria-relevant="additions text"
-    ></div>
-
-    <div class="ai-chat__suggests" id="ai-chat-suggests">
-      <button data-q="Fortæl om din erfaring hos UIA">Erfaring hos UIA</button>
-      <button data-q="Hvilke tekniske færdigheder har du?">
-        Tekniske færdigheder
-      </button>
-      <button data-q="Hvilke sprog taler du?">Sprog</button>
-      <button data-q="Fortæl om frivilligt arbejde">Frivilligt arbejde</button>
-    </div>
-
-    <!-- важливо: action запобігає навігації навіть без JS; залишаємо submit для Enter -->
-    <form
-      id="ai-chat-form"
-      class="ai-chat__form"
-      autocomplete="off"
-      action="javascript:void(0)"
-    >
-      <label class="visually-hidden" for="ai-chat-input"
-        >Skriv dit spørgsmål</label
-      >
-      <input
-        id="ai-chat-input"
-        name="q"
-        placeholder="Spørg om erfaring, skills, uddannelse… (da/en)"
-      />
-      <button type="submit" class="ai-chat__send" aria-label="Send">
-        Send
-      </button>
-    </form>
-  </aside>
 
   <body>
     <!-- індикатор прокрутки -->
@@ -132,6 +56,7 @@
     </header>
 
     <main>
+      <!-- Om mig -->
       <section id="om-mig" class="section reveal">
         <h2>Om mig</h2>
         <p>
@@ -142,6 +67,7 @@
         </p>
       </section>
 
+      <!-- Erfaring -->
       <section id="erfaring" class="section reveal">
         <h2>Erfaring</h2>
 
@@ -228,6 +154,7 @@
         </article>
       </section>
 
+      <!-- Uddannelse -->
       <section id="uddannelse" class="section reveal">
         <h2>Uddannelse</h2>
         <ul class="reveal-item">
@@ -244,6 +171,7 @@
         </ul>
       </section>
 
+      <!-- Skills -->
       <section id="skills" class="section reveal">
         <h2>Tekniske færdigheder</h2>
         <ul class="skills-grid">
@@ -256,6 +184,7 @@
         </ul>
       </section>
 
+      <!-- Frivilligt -->
       <section id="frivilligt" class="section reveal">
         <h2>Frivilligt arbejde</h2>
         <p class="reveal-item">
@@ -268,6 +197,7 @@
         </p>
       </section>
 
+      <!-- Kontakt -->
       <section id="kontakt" class="section reveal">
         <h2>Kontakt</h2>
         <address class="contact card reveal-item">
@@ -285,6 +215,87 @@
       © <span id="year"></span> Anastasiia Chaplyhina
     </footer>
 
+    <!-- ===== AI Chatbot ===== -->
+    <button
+      id="ai-chat-toggle"
+      aria-expanded="false"
+      aria-controls="ai-chat"
+      aria-label="Open career chatbot"
+    >
+      💬
+    </button>
+
+    <aside
+      id="ai-chat"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ai-chat-title"
+      hidden
+    >
+      <header class="ai-chat__header">
+        <h2 id="ai-chat-title">Chat med Anastasiias CV-bot</h2>
+        <div class="ai-chat__actions">
+          <button
+            id="ai-chat-minimize"
+            class="ai-chat__mini"
+            aria-label="Minimize chat"
+            title="Minimize"
+          >
+            ▁
+          </button>
+          <button
+            id="ai-chat-close"
+            class="ai-chat__close"
+            aria-label="Close chat"
+            title="Close"
+          >
+            ✕
+          </button>
+        </div>
+      </header>
+
+      <div
+        id="ai-chat-log"
+        class="ai-chat__log"
+        aria-live="polite"
+        aria-relevant="additions text"
+      ></div>
+
+      <div class="ai-chat__suggests" id="ai-chat-suggests">
+        <button data-q="Fortæl om din erfaring hos UIA">
+          Erfaring hos UIA
+        </button>
+        <button data-q="Hvilke tekniske færdigheder har du?">
+          Tekniske færdigheder
+        </button>
+        <button data-q="Hvilke sprog taler du?">Sprog</button>
+        <button data-q="Fortæl om frivilligt arbejde">
+          Frivilligt arbejde
+        </button>
+      </div>
+
+      <!-- action блокує навігацію навіть без JS -->
+      <form
+        id="ai-chat-form"
+        class="ai-chat__form"
+        autocomplete="off"
+        action="javascript:void(0)"
+      >
+        <label class="visually-hidden" for="ai-chat-input"
+          >Skriv dit spørgsmål</label
+        >
+        <input
+          id="ai-chat-input"
+          name="q"
+          placeholder="Spørg om erfaring, skills, uddannelse… (da/en)"
+        />
+        <button type="submit" class="ai-chat__send" aria-label="Send">
+          Send
+        </button>
+      </form>
+    </aside>
+
+    <!-- Скрипт (має лежати поруч із index.html) -->
     <script src="main.js"></script>
   </body>
 </html>

@@ -458,3 +458,8 @@ noscript .reveal {
 #ai-chat.collapsed .ai-chat__form {
     display: none !important;
 }
+
+.no-js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
