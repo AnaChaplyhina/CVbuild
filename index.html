@@ -14,6 +14,63 @@
     <!-- Опціонально: колір тулбара у мобільних браузерах оновлюємо через JS -->
     <meta name="theme-color" content="#FADADD" id="meta-theme-color" />
   </head>
+
+  <!-- AI Chatbot -->
+  <button
+    id="ai-chat-toggle"
+    aria-expanded="false"
+    aria-controls="ai-chat"
+    aria-label="Open career chatbot"
+  >
+    💬
+  </button>
+
+  <aside
+    id="ai-chat"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ai-chat-title"
+    hidden
+  >
+    <header class="ai-chat__header">
+      <h2 id="ai-chat-title">Chat med Anastasiias CV-bot</h2>
+      <button id="ai-chat-close" class="ai-chat__close" aria-label="Close chat">
+        ✕
+      </button>
+    </header>
+
+    <div
+      id="ai-chat-log"
+      class="ai-chat__log"
+      aria-live="polite"
+      aria-relevant="additions text"
+    ></div>
+
+    <div class="ai-chat__suggests" id="ai-chat-suggests">
+      <!-- підказки-кнопки -->
+      <button data-q="Fortæl om din erfaring hos UIA">Erfaring hos UIA</button>
+      <button data-q="Hvilke tekniske færdigheder har du?">
+        Tekniske færdigheder
+      </button>
+      <button data-q="Hvilke sprog taler du?">Sprog</button>
+      <button data-q="Fortæl om frivilligt arbejde">Frivilligt arbejde</button>
+    </div>
+
+    <form id="ai-chat-form" class="ai-chat__form" autocomplete="off">
+      <label class="visually-hidden" for="ai-chat-input"
+        >Skriv dit spørgsmål</label
+      >
+      <input
+        id="ai-chat-input"
+        name="q"
+        placeholder="Spørg om erfaring, skills, uddannelse… (da/en)"
+      />
+      <button type="submit" class="ai-chat__send" aria-label="Send">
+        Send
+      </button>
+    </form>
+  </aside>
+
   <body>
     <!-- індикатор прокрутки -->
     <div id="scroll-progress" aria-hidden="true"></div>
