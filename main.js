@@ -3,40 +3,100 @@
 document.documentElement.classList.remove('no-js');
 
 
-// ==================== ТЕМИ: Pastel / Dark з пам'яттю ====================
+// ==================== LANGUAGE SWITCHING ====================
+(function languageInit() {
+  const html = document.documentElement;
+  const btn = document.getElementById('lang-toggle');
+  const LANG_KEY = 'language-preference';
+  
+  function updateLanguage(lang) {
+    html.setAttribute('data-lang', lang);
+    
+    // Update navigation text
+    document.querySelectorAll('[data-da][data-en]').forEach(el => {
+      const text = lang === 'da' ? el.getAttribute('data-da') : el.getAttribute('data-en');
+      if (text && !el.querySelector('span, div')) {
+        el.textContent = text;
+      }
+    });
+    
+    // Update placeholder text
+    document.querySelectorAll('[data-placeholder-da][data-placeholder-en]').forEach(el => {
+      const placeholder = lang === 'da' ? el.getAttribute('data-placeholder-da') : el.getAttribute('data-placeholder-en');
+      if (placeholder) {
+        el.setAttribute('placeholder', placeholder);
+      }
+    });
+    
+    // Update chat suggestions
+    document.querySelectorAll('[data-q-da][data-q-en]').forEach(el => {
+      const question = lang === 'da' ? el.getAttribute('data-q-da') : el.getAttribute('data-q-en');
+      if (question) {
+        el.setAttribute('data-q', question);
+      }
+    });
+    
+    // Update button text and flag
+    if (btn) {
+      const flag = lang === 'da' ? '🇬🇧' : '🇩🇰';
+      const text = lang === 'da' ? 'EN' : 'DA';
+      btn.innerHTML = `<span class="lang-flag">${flag}</span> ${text}`;
+    }
+    
+    localStorage.setItem(LANG_KEY, lang);
+  }
+  
+  // Initialize language
+  const saved = localStorage.getItem(LANG_KEY) || 'da';
+  updateLanguage(saved);
+  
+  // Toggle language
+  btn?.addEventListener('click', () => {
+    const current = html.getAttribute('data-lang') || 'da';
+    const next = current === 'da' ? 'en' : 'da';
+    updateLanguage(next);
+  });
+})();
+
+
+// ==================== MODERN THEME SYSTEM ====================
 (function themeInit(){
   const html = document.documentElement;
   const btn = document.getElementById('theme-toggle');
   const metaTheme = document.getElementById('meta-theme-color');
 
-  const THEMES = { AUTO:'auto', LIGHT:'light', DARK:'dark' };
+  const THEMES = { LIGHT:'light', DARK:'dark', AUTO:'auto' };
   const STORAGE_KEY = 'theme-preference';
   const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   function updateToggleLabel(mode){
     const isDark = (mode === THEMES.DARK) || (mode === THEMES.AUTO && systemPrefersDark);
     if (btn){
-      btn.textContent = isDark ? '🌤 Pastel' : '🌙 Dark';
+      btn.textContent = isDark ? '🌤 Light' : '🌙 Dark';
       btn.setAttribute('aria-pressed', String(isDark));
     }
   }
+  
   function updateMetaThemeColor(mode){
     const styles = getComputedStyle(document.documentElement);
-    const headerColor = styles.getPropertyValue('--accent-1').trim() || '#FADADD';
+    const isDark = (mode === THEMES.DARK) || (mode === THEMES.AUTO && systemPrefersDark);
+    const headerColor = isDark ? '#0f172a' : '#667eea';
     if (metaTheme) metaTheme.setAttribute('content', headerColor);
   }
+  
   function applyTheme(mode){
     html.setAttribute('data-theme', mode);
     updateToggleLabel(mode);
     updateMetaThemeColor(mode);
   }
+  
   function currentMode(){
-    return html.getAttribute('data-theme') || THEMES.AUTO;
+    return html.getAttribute('data-theme') || THEMES.DARK;
   }
 
-  // init
-  const saved = localStorage.getItem(STORAGE_KEY); // 'light' | 'dark' | 'auto' | null
-  applyTheme(saved || THEMES.AUTO);
+  // init - default to dark theme
+  const saved = localStorage.getItem(STORAGE_KEY);
+  applyTheme(saved || THEMES.DARK);
 
   // react to system change in AUTO
   if (window.matchMedia){
@@ -49,12 +109,12 @@ document.documentElement.classList.remove('no-js');
     });
   }
 
-  // toggle: Light → Dark → Auto → Light...
+  // toggle: Dark → Light → Auto → Dark...
   btn?.addEventListener('click', () => {
     const mode = currentMode();
-    const next = mode === THEMES.LIGHT ? THEMES.DARK
-               : mode === THEMES.DARK  ? THEMES.AUTO
-               : THEMES.LIGHT;
+    const next = mode === THEMES.DARK ? THEMES.LIGHT
+               : mode === THEMES.LIGHT ? THEMES.AUTO
+               : THEMES.DARK;
     localStorage.setItem(STORAGE_KEY, next);
     applyTheme(next);
   });
@@ -94,7 +154,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 })();
 
 
-// ==================== Active nav + Scroll progress ====================
+// ==================== Enhanced Active nav + Scroll progress ====================
 (function highlightActiveNav() {
   const sections = [...document.querySelectorAll('main section[id]')];
   const links = new Map(
@@ -179,60 +239,85 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (on && !el){
       el = document.createElement('div');
       el.id = id; el.className='ai-msg ai-msg--bot ai-typing';
-      el.textContent = 'Skriver…';
+      const currentLang = document.documentElement.getAttribute('data-lang') || 'da';
+      el.textContent = currentLang === 'en' ? 'Typing...' : 'Skriver…';
       log.appendChild(el);
     } else if (!on && el){ el.remove(); }
     log.scrollTop = log.scrollHeight;
   }
 
-  // Knowledge base
+  // Enhanced Knowledge base with AI integration focus
   const KB = [
-    { t:['uia','ukraine international airlines','kommunikationschef','krise','presse','medie'],
-      a:`<strong>Kommunikationschef — Ukraine International Airlines (2017–2022)</strong><br>
-         • Officielle statements, interviews, web/SoMe-indhold.<br>
-         • Krisehåndtering og kommunikationsstrategi; pressemøder/presseture.<br>
-         • Tværfagligt samarbejde for at optimere processer (flight maintenance).` },
-    { t:['tui','agency relations','loyalitetsprogram','online'],
+    { t:['ai','artificial intelligence','integration','business analysis','etisk ai','ethical ai','governance'],
+      a:`<strong>AI Integration & Business Analysis</strong><br>
+         • Specialiserer mig i at forbinde forretningsbehov med AI-baserede løsninger.<br>
+         • Fokus på etisk AI-governance, databeskyttelse og GDPR-compliance.<br>
+         • Anvender analytisk tilgang til at oversætte komplekse tekniske koncepter til ikke-tekniske interessenter.` },
+    { t:['fullstack','development','frontend','backend','goit','javascript','node'],
+      a:`<strong>FullStack Development</strong><br>
+         • Igangværende uddannelse på GoIT (2024–2025).<br>
+         • Praktisk erfaring med front-end og back-end udvikling.<br>
+         • Stack: JavaScript, HTML5, CSS3, React, Node.js, Git/GitHub.` },
+    { t:['krise','crisis','management','problemløsning','uia','ukraine','flyulykke','iran'],
+      a:`<strong>Krisehåndtering & Problemløsning</strong><br>
+         • Nøglerolle under den tragiske UIA-flyulykke i Iran som del af det centrale team.<br>
+         • Dokumenteret evne til at navigere i komplekse, usikre miljøer under tidspres.<br>
+         • Stærk baggrund i risiko-vurdering og hurtige beslutninger.` },
+    { t:['kommunikation','communication','pr','manager','uia','ukraine international airlines','digital team'],
+      a:`<strong>Communication/PR Manager — Ukraine International Airlines (2017–2022)</strong><br>
+         • Etablerede og ledede et team på 10 social medie-specialister.<br>
+         • Håndterede strategisk krisekommunikation og udviklede digitale kommunikationsstrategier.<br>
+         • Støttede direktionen med briefings og interviewmaterialer til CEO.` },
+    { t:['projektledelse','project management','leadership','team','stakeholder'],
+      a:`<strong>Projektledelse & Teamledelse</strong><br>
+         • Solid erfaring i at lede tværfunktionelle teams og styre projekter fra koncept til implementering.<br>
+         • Stærk i stakeholder engagement og formidling af tekniske koncepter.<br>
+         • Erfaring med at drive organisatoriske forandringer.` },
+    { t:['tui','agency relations','partnerskaber','booking systemer'],
       a:`<strong>Agency Relations Manager — TUI (2020)</strong><br>
-         • Administration af onlinesystemer, partner-support, loyalitetsprogrammer.<br>
-         • Rådgivning/uddannelse og forbedring af onlinesalg.` },
-    { t:['social media','kundeservice','support'],
-      a:`<strong>Social Media Customer Specialist — UIA (2016–2017)</strong><br>
-         • Kommunikation med kunder og løsning af tekniske problemer.` },
-    { t:['lampemestern','lager','truck','revision'],
-      a:`<strong>Lagerspecialist — Lampemestern A/S (2022–2024)</strong><br>
-         • Modtagelse/inspektion, revision, truckkørsel, pakning.` },
-    { t:['hotel ringkøbing','servitrice','køkken','fisk'],
-      a:`<strong>Servitrice / Køkkenassistent — Hotel Ringkøbing (2022)</strong><br>
-         • Gæstebetjening, bar, ordrer; mise en place (fisk).` },
-    { t:['gartneri','vikar','blomster'],
-      a:`<strong>Gartneriarbejder — Vikar Bureau (2024)</strong><br>
-         • Plantning og pakning af blomster.` },
-    { t:['uddannelse','education','goit','ucplus','bachelor','kandidat'],
-      a:`<strong>Uddannelse</strong><br>
-         • Kandidat: Kyiv National Linguistic University (2014–2016).<br>
-         • Bachelor: Kyiv National Transport University (2011–2014).<br>
-         • Danskuddannelse — UCPLUS (2022–2023).<br>
-         • Fullstack — GoIT (2024–2025).` },
-    { t:['skills','færdigheder','tech','stack','værktøjer'],
-      a:`<strong>Tekniske færdigheder</strong><br>
-         • JavaScript, HTML, CSS, Node.js; Git/GitHub.<br>
-         • Figma, Canva; Avid Media Composer.<br>
-         • AWS, Google Cloud; AI: ChatGPT, CopyAI.` },
-    { t:['volunteer','frivilligt','røde kors','humanitær'],
-      a:`<strong>Frivilligt arbejde</strong><br>
-         • Kommunikationskonsulent (2022–2024) — støtte til ukrainske familier i DK/UA.<br>
-         • Røde Kors (2022–2023) — events og oversættelse.` },
-    { t:['sprog','languages','danish','english','ukrainian','russian','german'],
+         • Vedligeholdt partnerskaber med rejsebureauer og leverede træning i online bookingsystemer.<br>
+         • Administrerede onlinesystemer og loyalitetsprogrammer for at forbedre partner-engagement.` },
+    { t:['køkkenassistent','gymnastik','ollerup','2025','current job'],
+      a:`<strong>Køkkenassistent — Gymnastikhøjskolen i Ollerup (2025–nu)</strong><br>
+         • Tilbereder mad i forskellige køkkenafdelinger (bageri, koldt & varmt køkken).<br>
+         • Fokus på hygiejne og tidsfrister i et travlt teammiljø.` },
+    { t:['danmark','arbejdskultur','midlertidige stillinger','2022-2024'],
+      a:`<strong>Øvrig Beskæftigelse i Danmark (2022–2024)</strong><br>
+         • Erfaring fra lager-, rengørings- og servicejobs.<br>
+         • Opnåede værdifuld indsigt i dansk arbejdskultur og gennemførte videreuddannelse.<br>
+         • Viser tilpasningsevne og engagement i kontinuerlig læring.` },
+    { t:['uddannelse','education','ai course','fullstack','goit','bachelor','technical translation'],
+      a:`<strong>Uddannelse & Kurser</strong><br>
+         • <strong>AI Integration for Business, Marketing and Communications</strong> (igangværende, 2025)<br>
+         • <strong>Fullstack Development</strong> — GoIT (2024–2025)<br>
+         • <strong>Bachelor i Teknisk Oversættelse</strong> — National Transport University, Kyiv (2016)<br>
+         • <strong>Danskuddannelse (DU3.5, B2)</strong> — UCplus & AOF (2022-2025)` },
+    { t:['skills','færdigheder','tech','stack','værktøjer','ai tools','cloud'],
+      a:`<strong>Tekniske Færdigheder</strong><br>
+         • <strong>AI & Machine Learning:</strong> ChatGPT, CopyAI, AI Integration, Ethical AI, GDPR Compliance<br>
+         • <strong>Frontend:</strong> JavaScript, HTML5, CSS3, React, Responsive Design<br>
+         • <strong>Backend & Tools:</strong> Node.js, Git/GitHub, AWS, Google Cloud, APIs<br>
+         • <strong>Design:</strong> Figma, Canva, Avid Media Composer, UX/UI` },
+    { t:['volunteer','frivilligt','røde kors','tolk','event','coordinator','ukrainsk'],
+      a:`<strong>Frivilligt Arbejde</strong><br>
+         • <strong>Tolk & Eventkoordinator — Røde Kors Danmark (2022–2023)</strong>: Arrangerede events og leverede oversættelsestjenester for ukrainere.<br>
+         • <strong>Kommunikationskonsulent (2022–2024)</strong>: Hjalp ukrainske familier i Danmark og Ukraine med humanitær støtte og socialisering.` },
+    { t:['sprog','languages','danish','english','ukrainian','russian','german','c1','b2'],
       a:`<strong>Sprog</strong><br>
-         • Ukrainsk (modersmål), Engelsk (C1), Dansk (B1), Russisk (C2), Tysk (A1).` },
-    { t:['kontakt','email','telefon','contact'],
-      a:`Kontakt: <a href="mailto:chaplyhina.anastasiia@gmail.com">chaplyhina.anastasiia@gmail.com</a>,
-          <a href="tel:+4555279574">+45 55 27 95 74</a>.` },
-    { t:['summary','om mig','about','profil','resume'],
-      a:`Jeg har 8+ års erfaring i kommunikation/medieproduktion/krisehåndtering
-          fra luftfartsbranchen samt praktisk erfaring i service og logistik.
-          Nu fokuserer jeg på front-end og brugervenlige løsninger.` },
+         • <strong>Engelsk (C1)</strong> — Flydende<br>
+         • <strong>Dansk (B2)</strong> — Avanceret niveau<br>
+         • <strong>Ukrainsk (C2)</strong> — Modersmål<br>
+         • <strong>Russisk (C2)</strong> — Flydende<br>
+         • <strong>Tysk (A1)</strong> — Begynderniveau` },
+    { t:['kontakt','email','telefon','contact','aarslev','fyn'],
+      a:`<strong>Kontakt Information</strong><br>
+         📧 <a href="mailto:chaplyhina.anastasiia@gmail.com">chaplyhina.anastasiia@gmail.com</a><br>
+         📞 <a href="tel:+4555279574">+45 55 27 95 74</a><br>
+         📍 Aarslev, Fyn, Danmark<br>
+         💼 Lovligt arbejde i Danmark/EU` },
+    { t:['summary','om mig','about','profil','professional profile','proaktiv'],
+      a:`<strong>Professionel Profil</strong><br>
+         Proaktiv og løsningsorienteret professionel med en unik kombination af erfaring i krisekommunikation og nyerhvervede færdigheder inden for AI og FullStack-udvikling. Jeg specialiserer mig i at identificere forretningsbehov og oversætte dem til teknologiske løsninger, der forbedrer effektiviteten og skaber reel værdi.` },
   ];
 
   function retrieve(q){
@@ -247,18 +332,30 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       if (/(uia|ukraine|tui|ringkøbing|lampemestern|røde kors|skills|uddannelse)/.test(s)) score += 2;
       if (score > bestScore){ bestScore = score; best = item; }
     }
+    // Boost score for key terms
+    if (bestScore > 0 && /(ai|artificial intelligence|fullstack|crisis|communication|ukraine|project management)/.test(s)) {
+      bestScore += 2;
+    }
     return bestScore > 0 ? best : null;
   }
 
   async function answer(q){
     const n = norm(q);
-    if (!n) return 'Skriv et spørgsmål om erfaring, færdigheder, uddannelse eller frivilligt arbejde 🙂';
+    if (!n) return 'Skriv et spørgsmål om AI-integration, FullStack-udvikling, krisehåndtering eller anden erfaring 🙂';
     if (/^(hej|hello|hi|hey)\b/.test(n)){
-      return 'Hej! Spørg fx: "Erfaring hos UIA", "Hvilke tekniske færdigheder har du?" eller "Fortæl om frivilligt arbejde".';
+      const currentLang = document.documentElement.getAttribute('data-lang') || 'da';
+      if (currentLang === 'en') {
+        return 'Hello! Ask me about: "AI integration experience", "Technical skills", "Crisis management" or "FullStack development".';
+      }
+      return 'Hej! Spørg fx: "AI integration erfaring", "Tekniske færdigheder", "Krisehåndtering" eller "FullStack udvikling".';
     }
     const found = retrieve(q);
     if (found) return found.a;
-    return 'Det har jeg ikke helt fanget endnu. Prøv at spørge om erfaring, færdigheder, uddannelse eller frivilligt arbejde.';
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'da';
+    if (currentLang === 'en') {
+      return 'I didn\'t quite catch that. Try asking about AI integration, FullStack development, crisis management, or technical skills.';
+    }
+    return 'Det har jeg ikke helt fanget endnu. Prøv at spørge om AI-integration, FullStack-udvikling, krisehåndtering eller tekniske færdigheder.';
   }
 
   // UI
@@ -267,7 +364,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     pane.classList.remove('collapsed');
     toggle.setAttribute('aria-expanded','true');
     if (!log.dataset.init){
-      say('Hej! Jeg er din CV-bot. Spørg mig om erfaring, færdigheder, uddannelse eller frivilligt arbejde (da/en).');
+      const currentLang = document.documentElement.getAttribute('data-lang') || 'da';
+      const welcomeMsg = currentLang === 'en' 
+        ? 'Hello! I\'m your CV bot. Ask me about AI integration, FullStack development, crisis management, or technical skills (da/en).'
+        : 'Hej! Jeg er din CV-bot. Spørg mig om AI-integration, FullStack-udvikling, krisehåndtering eller tekniske færdigheder (da/en).';
+      say(welcomeMsg);
       log.dataset.init = '1';
     }
     setTimeout(()=>input?.focus(), 0);
