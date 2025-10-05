@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="da" class="no-js" data-theme="auto">
+<html lang="da" class="no-js" data-theme="dark" data-lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anastasiia Chaplyhina – CV & Portfolio</title>
+    <title>Anastasiia Chaplyhina – AI & FullStack Developer</title>
 
     <!-- Шрифти -->
     <link
@@ -12,7 +12,8 @@
     />
     <!-- УВАГА: папка стилів має називатись саме "CSS" (з великої літери) -->
     <link rel="stylesheet" href="CSS/styles.css" />
-    <meta name="theme-color" content="#FADADD" id="meta-theme-color" />
+    <meta name="theme-color" content="#111418" id="meta-theme-color" />
+    <meta name="description" content="Proactive AI Integration & FullStack Developer with crisis management experience. Specializing in bridging business needs with technological solutions." />
   </head>
 
   <body>
@@ -22,190 +23,266 @@
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary">
         <ul>
-          <li><a href="#om-mig">Om mig</a></li>
-          <li><a href="#erfaring">Erfaring</a></li>
-          <li><a href="#uddannelse">Uddannelse</a></li>
-          <li><a href="#skills">Tekniske færdigheder</a></li>
-          <li><a href="#frivilligt">Frivilligt arbejde</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#about" data-da="Om mig" data-en="About">Om mig</a></li>
+          <li><a href="#experience" data-da="Erfaring" data-en="Experience">Erfaring</a></li>
+          <li><a href="#education" data-da="Uddannelse" data-en="Education">Uddannelse</a></li>
+          <li><a href="#skills" data-da="Tekniske færdigheder" data-en="Technical Skills">Tekniske færdigheder</a></li>
+          <li><a href="#volunteer" data-da="Frivilligt arbejde" data-en="Volunteer Work">Frivilligt arbejde</a></li>
+          <li><a href="#portfolio" data-da="Portfolio" data-en="Portfolio">Portfolio</a></li>
+          <li><a href="#contact" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
           <li class="lang-switch">
-            <a href="#" aria-label="Switch to English">EN</a>
+            <button id="lang-toggle" class="lang-btn" aria-label="Switch language">
+              <span class="lang-flag">🇬🇧</span> EN
+            </button>
           </li>
           <li class="theme-switch">
             <button
               id="theme-toggle"
               class="theme-btn"
               type="button"
-              aria-pressed="false"
+              aria-pressed="true"
               aria-label="Toggle color theme"
             >
-              🌙 Dark
+              🌤 Light
             </button>
           </li>
         </ul>
       </nav>
 
       <h1 class="title">Anastasiia Chaplyhina</h1>
-      <p class="subtitle">Frontend • Kommunikation • Events</p>
+      <p class="subtitle" data-da="AI Integration • FullStack • Krisehåndtering" data-en="AI Integration • FullStack • Crisis Management">AI Integration • FullStack • Krisehåndtering</p>
       <p class="contacts">
         <a href="mailto:chaplyhina.anastasiia@gmail.com"
           >chaplyhina.anastasiia@gmail.com</a
         >
-        · <a href="tel:+4555279574">+45 55 27 95 74</a> · Årslev, 5792
+        · <a href="tel:+4555279574">+45 55 27 95 74</a> · Aarslev, Fyn
       </p>
       <p>
-        <button
-          id="btn-print"
-          class="btn-print"
-          type="button"
-          aria-label="Download PDF"
-        >
-          ⬇ Download PDF
-        </button>
+        <div class="header-actions">
+          <button
+            id="btn-print"
+            class="btn-print"
+            type="button"
+            aria-label="Download PDF"
+            data-da="⬇ Download PDF"
+            data-en="⬇ Download PDF"
+          >
+            ⬇ Download PDF
+          </button>
+          <a href="#contact" class="btn-contact" data-da="📧 Kontakt" data-en="📧 Contact">📧 Kontakt</a>
+        </div>
       </p>
     </header>
 
     <main>
-      <!-- Om mig -->
-      <section id="om-mig" class="section reveal">
-        <h2>Om mig</h2>
-        <p>
-          Med over 8 år i luftfartsbranchen (kommunikation, medieproduktion,
-          krisehåndtering og kunderelationer). Stærke problemløsningsevner,
-          strategi og ro i pressede situationer. Arbejder selvstændigt og i
-          team; høj ansvarsfølelse, tidsstyring og kritisk tænkning.
-        </p>
+      <!-- About -->
+      <section id="about" class="section reveal">
+        <h2 data-da="Om mig" data-en="About Me">Om mig</h2>
+        <div class="about-content">
+          <p data-da="Proaktiv og løsningsorienteret professionel med en unik kombination af erfaring i krisekommunikation og nyerhvervede færdigheder inden for AI og FullStack-udvikling. Jeg specialiserer mig i at identificere forretningsbehov og oversætte dem til teknologiske løsninger, der forbedrer effektiviteten og skaber reel værdi." data-en="A proactive and solution-oriented professional with a unique blend of crisis management experience and new skills in AI and FullStack development. I specialize in bridging the gap between business needs and technological solutions to improve efficiency and drive tangible value.">Proaktiv og løsningsorienteret professionel med en unik kombination af erfaring i krisekommunikation og nyerhvervede færdigheder inden for AI og FullStack-udvikling. Jeg specialiserer mig i at identificere forretningsbehov og oversætte dem til teknologiske løsninger, der forbedrer effektiviteten og skaber reel værdi.</p>
+          <p data-da="Jeg har en stærk forståelse for vigtigheden af etisk AI-governance, databeskyttelse og compliance (GDPR), og jeg trives med at lede projekter og drive forandringer. Flydende i engelsk (C1) og på avanceret niveau i dansk (B2)." data-en="I have a strong understanding of the importance of ethical AI governance, data security, and compliance, and I thrive on leading projects and driving organizational change. I am fluent in English (C1) and proficient in Danish (B2).">Jeg har en stærk forståelse for vigtigheden af etisk AI-governance, databeskyttelse og compliance (GDPR), og jeg trives med at lede projekter og drive forandringer. Flydende i engelsk (C1) og på avanceret niveau i dansk (B2).</p>
+          <div class="core-competencies reveal-item">
+            <h3 data-da="Kernekompetencer" data-en="Core Competencies">Kernekompetencer</h3>
+            <ul class="competencies-grid">
+              <li data-da="AI-integration & Forretningsanalyse" data-en="AI Integration & Business Analysis">AI-integration & Forretningsanalyse</li>
+              <li data-da="Projektledelse" data-en="Project Management">Projektledelse</li>
+              <li data-da="FullStack Development" data-en="FullStack Development">FullStack Development</li>
+              <li data-da="Krisehåndtering & Problemløsning" data-en="Crisis Management & Problem-Solving">Krisehåndtering & Problemløsning</li>
+              <li data-da="Kommunikation & Stakeholder Engagement" data-en="Communication & Stakeholder Engagement">Kommunikation & Stakeholder Engagement</li>
+              <li data-da="Etisk AI & Governance" data-en="Ethical AI & Governance">Etisk AI & Governance</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <!-- Erfaring -->
-      <section id="erfaring" class="section reveal">
-        <h2>Erfaring</h2>
+      <!-- Experience -->
+      <section id="experience" class="section reveal">
+        <h2 data-da="Erhvervserfaring" data-en="Professional Experience">Erhvervserfaring</h2>
 
         <article class="job card reveal-item">
           <header>
-            <h3>Kommunikationschef — Ukraine International Airlines</h3>
-            <time>aug 2017 – jan 2022</time>
+            <h3 data-da="Communication/PR Manager" data-en="Communication/PR Manager">Communication/PR Manager</h3>
+            <div class="job-meta">
+              <span class="company" data-da="Ukraine International Airlines" data-en="Ukraine International Airlines">Ukraine International Airlines</span>
+              <time>2017 – 2022</time>
+            </div>
           </header>
           <ul>
-            <li>
-              Skriftligt indhold til web & sociale medier; officielle statements
-              og interviews.
-            </li>
-            <li>
-              Krisehåndtering og kommunikationsstrategi; pressemøder og
-              presseture.
-            </li>
-            <li>
-              Samarbejde på tværs af afdelinger for bedre processer i flight
-              maintenance.
-            </li>
+            <li data-da="Håndterede krisekommunikation som en del af det centrale team under den tragiske flyulykke i Iran. Lærte at navigere i komplekse, omskiftelige miljøer med fokus på strategisk kommunikation." data-en="Navigated complex crisis communication as a key member of the central team during the tragic UIA plane crash in Iran, learning to manage rapidly evolving situations with strategic focus.">Håndterede krisekommunikation som en del af det centrale team under den tragiske flyulykke i Iran. Lærte at navigere i komplekse, omskiftelige miljøer med fokus på strategisk kommunikation.</li>
+            <li data-da="Etablerede og ledede et team på 10 social medie-specialister og udviklede digitale kommunikationsstrategier." data-en="Established and led a team of 10 social media specialists, developing digital communication strategies.">Etablerede og ledede et team på 10 social medie-specialister og udviklede digitale kommunikationsstrategier.</li>
+            <li data-da="Støttede direktionen med udarbejdelse af briefings og interviewtekster til CEO." data-en="Provided executive support by drafting briefings and interview materials for company CEO.">Støttede direktionen med udarbejdelse af briefings og interviewtekster til CEO.</li>
           </ul>
         </article>
 
         <article class="job card reveal-item">
           <header>
-            <h3>Agency Relations Manager — TUI</h3>
-            <time>jan 2020 – apr 2020</time>
+            <h3 data-da="Agency Relations Manager" data-en="Agency Relations Manager">Agency Relations Manager</h3>
+            <div class="job-meta">
+              <span class="company">TUI</span>
+              <time>2020</time>
+            </div>
           </header>
           <ul>
-            <li>
-              Administration af onlinesystemer, partner-support,
-              loyalitetsprogrammer.
-            </li>
-            <li>
-              Forbedring af onlinesalg og rådgivning/uddannelse af bureauer.
-            </li>
+            <li data-da="Vedligeholdt partnerskaber med rejsebureauer og leverede træning i online bookingsystemer." data-en="Maintained partnerships with travel agencies and provided training on online booking systems.">Vedligeholdt partnerskaber med rejsebureauer og leverede træning i online bookingsystemer.</li>
+            <li data-da="Administrerede onlinesystemer og loyalitetsprogrammer for at forbedre partner-engagement." data-en="Managed online systems and loyalty programs to enhance partner engagement.">Administrerede onlinesystemer og loyalitetsprogrammer for at forbedre partner-engagement.</li>
           </ul>
         </article>
 
         <article class="job card reveal-item">
           <header>
-            <h3>Social Media Customer Specialist — UIA</h3>
-            <time>jul 2016 – aug 2017</time>
+            <h3 data-da="Social Media Customer Specialist" data-en="Social Media Customer Specialist">Social Media Customer Specialist</h3>
+            <div class="job-meta">
+              <span class="company">Ukraine International Airlines</span>
+              <time>2016 – 2017</time>
+            </div>
           </header>
           <ul>
-            <li>Dialog med kunder og løsning af tekniske problemer.</li>
+            <li data-da="Håndterede kundekommunikation via digitale kanaler og arbejdede med systemer som ALTEA CM og Amadeus." data-en="Managed customer communication via digital channels, utilizing systems such as ALTEA CM and Amadeus.">Håndterede kundekommunikation via digitale kanaler og arbejdede med systemer som ALTEA CM og Amadeus.</li>
           </ul>
         </article>
 
         <article class="job card reveal-item">
           <header>
-            <h3>Gartneriarbejder — Vikar Bureau</h3>
-            <time>maj 2024 – aug 2024</time>
+            <h3 data-da="Køkkenassistent" data-en="Kitchen Assistant">Køkkenassistent</h3>
+            <div class="job-meta">
+              <span class="company" data-da="Gymnastikhøjskolen i Ollerup" data-en="Gymnastikhøjskolen i Ollerup">Gymnastikhøjskolen i Ollerup</span>
+              <time>2025 – nu</time>
+            </div>
           </header>
           <ul>
-            <li>Plantning og pakning af blomster.</li>
+            <li data-da="Tilbereder mad i forskellige køkkenafdelinger (bageri, koldt & varmt køkken) med fokus på hygiejne og tidsfrister." data-en="Prepares food in various kitchen departments (bakery, cold & hot kitchen) with focus on hygiene and deadlines.">Tilbereder mad i forskellige køkkenafdelinger (bageri, koldt & varmt køkken) med fokus på hygiejne og tidsfrister.</li>
           </ul>
         </article>
 
-        <article class="job card reveal-item">
-          <header>
-            <h3>Lagerspecialist — Lampemestern A/S</h3>
-            <time>okt 2022 – feb 2024</time>
-          </header>
-          <ul>
-            <li>
-              Modtagelse/inspektion af varer, revision, truckkørsel, pakning.
-            </li>
-          </ul>
-        </article>
-
-        <article class="job card reveal-item">
-          <header>
-            <h3>Servitrice / Køkkenassistent — Hotel Ringkøbing</h3>
-            <time>maj 2022 – okt 2022</time>
-          </header>
-          <ul>
-            <li>
-              Gæstebetjening, ordrer, bar, tilberedning og mise en place
-              (særligt fisk).
-            </li>
-          </ul>
-        </article>
+        <div class="job-summary card reveal-item">
+          <h4 data-da="Øvrig Beskæftigelse i Danmark" data-en="Additional Employment in Denmark">Øvrig Beskæftigelse i Danmark</h4>
+          <p data-da="2022-2024: Erfaring fra lager-, rengørings- og servicejobs. Opnåede værdifuld indsigt i dansk arbejdskultur og gennemførte videreuddannelse i kommunikation & administration." data-en="2022-2024: Gained valuable insights into Danish workplace culture through experience in warehouse, cleaning, and service roles while pursuing professional development in communication & administration.">2022-2024: Erfaring fra lager-, rengørings- og servicejobs. Opnåede værdifuld indsigt i dansk arbejdskultur og gennemførte videreuddannelse i kommunikation & administration.</p>
+        </div>
       </section>
 
-      <!-- Uddannelse -->
-      <section id="uddannelse" class="section reveal">
-        <h2>Uddannelse</h2>
-        <ul class="reveal-item">
-          <li>
-            Oversætter (kandidat) — Kyiv National Linguistic University
-            (2014–2016)
-          </li>
-          <li>
-            Teknisk oversætter (bachelor) — Kyiv National Transport University
-            (2011–2014)
-          </li>
-          <li>Danskuddannelse for voksne udlændinge — UCPLUS (2022–2023)</li>
-          <li>Fullstack-udvikling — GoIT (2024–2025)</li>
-        </ul>
+      <!-- Education -->
+      <section id="education" class="section reveal">
+        <h2 data-da="Uddannelse & Kurser" data-en="Education & Training">Uddannelse & Kurser</h2>
+        <div class="education-grid">
+          <div class="education-item card reveal-item current">
+            <h3 data-da="Fullstack Development" data-en="Fullstack Development">Fullstack Development</h3>
+            <div class="edu-meta">
+              <span class="institution">GoIT</span>
+              <span class="period">2024–2025</span>
+              <span class="status ongoing" data-da="Igangværende" data-en="Ongoing">Igangværende</span>
+            </div>
+            <p data-da="Praktisk erfaring med front-end og back-end udvikling" data-en="Hands-on experience with front-end and back-end development">Praktisk erfaring med front-end og back-end udvikling</p>
+          </div>
+          <div class="education-item card reveal-item current">
+            <h3 data-da="AI Integration for Business, Marketing and Communications" data-en="AI Integration for Business, Marketing and Communications">AI Integration for Business, Marketing and Communications</h3>
+            <div class="edu-meta">
+              <span class="period">2025</span>
+              <span class="status ongoing" data-da="Igangværende" data-en="Ongoing">Igangværende</span>
+            </div>
+          </div>
+          <div class="education-item card reveal-item">
+            <h3 data-da="Bachelor i Teknisk Oversættelse" data-en="Bachelor in Technical Translation">Bachelor i Teknisk Oversættelse</h3>
+            <div class="edu-meta">
+              <span class="institution" data-da="National Transport University, Kyiv" data-en="National Transport University, Kyiv">National Transport University, Kyiv</span>
+              <span class="period">2016</span>
+            </div>
+            <p data-da="Engelsk–Ukrainsk" data-en="English–Ukrainian">Engelsk–Ukrainsk</p>
+          </div>
+          <div class="education-item card reveal-item">
+            <h3 data-da="Danskuddannelse (DU3.5, B2)" data-en="Danish Language Education (DU3.5, B2)">Danskuddannelse (DU3.5, B2)</h3>
+            <div class="edu-meta">
+              <span class="institution">UCplus & AOF</span>
+              <span class="period">2022-2025</span>
+            </div>
+          </div>
+          <div class="additional-courses reveal-item">
+            <h4 data-da="Supplerende Kurser" data-en="Additional Courses">Supplerende Kurser</h4>
+            <ul>
+              <li>Project Management Basics (GoIT)</li>
+              <li>Cybersecurity Essentials (Cisco)</li>
+              <li>Google Cloud Fundamentals</li>
+              <li data-da="Divercity Agent fra 3F" data-en="Divercity Agent from 3F">Divercity Agent fra 3F</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <!-- Skills -->
       <section id="skills" class="section reveal">
-        <h2>Tekniske færdigheder</h2>
-        <ul class="skills-grid">
-          <li class="reveal-item">JavaScript, HTML, CSS, Node.js</li>
-          <li class="reveal-item">Figma, Canva</li>
-          <li class="reveal-item">Avid Media Composer</li>
-          <li class="reveal-item">Git, GitHub</li>
-          <li class="reveal-item">AWS, Google Cloud</li>
-          <li class="reveal-item">AI: ChatGPT, CopyAI</li>
-        </ul>
+        <h2 data-da="Tekniske Færdigheder" data-en="Technical Skills">Tekniske Færdigheder</h2>
+        <div class="skills-categories">
+          <div class="skill-category card reveal-item">
+            <h3 data-da="AI & Machine Learning" data-en="AI & Machine Learning">AI & Machine Learning</h3>
+            <div class="skills-tags">
+              <span class="skill-tag">ChatGPT</span>
+              <span class="skill-tag">CopyAI</span>
+              <span class="skill-tag" data-da="AI Integration" data-en="AI Integration">AI Integration</span>
+              <span class="skill-tag" data-da="Ethical AI" data-en="Ethical AI">Ethical AI</span>
+              <span class="skill-tag">GDPR Compliance</span>
+            </div>
+          </div>
+          <div class="skill-category card reveal-item">
+            <h3 data-da="Frontend Udvikling" data-en="Frontend Development">Frontend Udvikling</h3>
+            <div class="skills-tags">
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Responsive Design</span>
+            </div>
+          </div>
+          <div class="skill-category card reveal-item">
+            <h3 data-da="Backend & Tools" data-en="Backend & Tools">Backend & Tools</h3>
+            <div class="skills-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Git/GitHub</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Google Cloud</span>
+              <span class="skill-tag">APIs</span>
+            </div>
+          </div>
+          <div class="skill-category card reveal-item">
+            <h3 data-da="Design & Media" data-en="Design & Media">Design & Media</h3>
+            <div class="skills-tags">
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Canva</span>
+              <span class="skill-tag">Avid Media Composer</span>
+              <span class="skill-tag">UX/UI</span>
+            </div>
+          </div>
+          <div class="skill-category card reveal-item">
+            <h3 data-da="Sprog" data-en="Languages">Sprog</h3>
+            <div class="skills-tags">
+              <span class="skill-tag" data-da="Engelsk (C1)" data-en="English (C1)">Engelsk (C1)</span>
+              <span class="skill-tag" data-da="Dansk (B2)" data-en="Danish (B2)">Dansk (B2)</span>
+              <span class="skill-tag" data-da="Ukrainsk (Modersmål)" data-en="Ukrainian (Native)">Ukrainsk (Modersmål)</span>
+              <span class="skill-tag" data-da="Russisk (C2)" data-en="Russian (C2)">Russisk (C2)</span>
+              <span class="skill-tag" data-da="Tysk (A1)" data-en="German (A1)">Tysk (A1)</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Frivilligt -->
-      <section id="frivilligt" class="section reveal">
-        <h2>Frivilligt arbejde</h2>
-        <p class="reveal-item">
-          Kommunikationskonsulent (mar 2022 – mar 2024): Hjælp til ukrainske
-          familier i DK og UA med humanitær støtte og socialisering.
-        </p>
-        <p class="reveal-item">
-          Røde Kors (mar 2022 – okt 2023): Arrangør & oversætter til events for
-          ukrainere.
-        </p>
+      <!-- Volunteer -->
+      <section id="volunteer" class="section reveal">
+        <h2 data-da="Frivilligt Arbejde" data-en="Volunteer Work">Frivilligt Arbejde</h2>
+        <div class="volunteer-activities">
+          <div class="volunteer-item card reveal-item">
+            <h3 data-da="Tolk & Eventkoordinator" data-en="Interpreter & Event Coordinator">Tolk & Eventkoordinator</h3>
+            <div class="volunteer-meta">
+              <span class="organization" data-da="Røde Kors Danmark" data-en="Danish Red Cross">Røde Kors Danmark</span>
+              <time>2022 – 2023</time>
+            </div>
+            <p data-da="Arrangør & oversætter til events for ukrainere. Bidrog til integration og samfundsdeltagelse." data-en="Organized events and provided translation services for Ukrainians, contributing to integration and community participation.">Arrangør & oversætter til events for ukrainere. Bidrog til integration og samfundsdeltagelse.</p>
+          </div>
+          <div class="volunteer-item card reveal-item">
+            <h3 data-da="Kommunikationskonsulent" data-en="Communication Consultant">Kommunikationskonsulent</h3>
+            <div class="volunteer-meta">
+              <time>2022 – 2024</time>
+            </div>
+            <p data-da="Hjælp til ukrainske familier i Danmark og Ukraine med humanitær støtte og socialisering." data-en="Assisted Ukrainian families in Denmark and Ukraine with humanitarian support and socialization.">Hjælp til ukrainske familier i Danmark og Ukraine med humanitær støtte og socialisering.</p>
+          </div>
+        </div>
       </section>
 
       <!-- Portfolio -->
@@ -245,17 +322,49 @@
         </div>
       </section>
 
-      <!-- Kontakt -->
-      <section id="kontakt" class="section reveal">
-        <h2>Kontakt</h2>
-        <address class="contact card reveal-item">
-          Email:
-          <a href="mailto:chaplyhina.anastasiia@gmail.com"
-            >chaplyhina.anastasiia@gmail.com</a
-          ><br />
-          Telefon: <a href="tel:+4555279574">+45 55 27 95 74</a><br />
-          Adresse: 5792, Årslev
-        </address>
+      <!-- Contact -->
+      <section id="contact" class="section reveal">
+        <h2 data-da="Kontakt" data-en="Contact">Kontakt</h2>
+        <div class="contact-content">
+          <address class="contact-card card reveal-item">
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <div>
+                <strong>Email:</strong><br>
+                <a href="mailto:chaplyhina.anastasiia@gmail.com">chaplyhina.anastasiia@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div>
+                <strong data-da="Telefon:" data-en="Phone:">Telefon:</strong><br>
+                <a href="tel:+4555279574">+45 55 27 95 74</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div>
+                <strong data-da="Adresse:" data-en="Address:">Adresse:</strong><br>
+                Aarslev, Fyn, Danmark
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">💼</span>
+              <div>
+                <strong data-da="Status:" data-en="Status:">Status:</strong><br>
+                <span data-da="Lovligt arbejde i Danmark/EU" data-en="Legal to work in Denmark/EU">Lovligt arbejde i Danmark/EU</span>
+              </div>
+            </div>
+          </address>
+          <div class="contact-cta card reveal-item">
+            <h3 data-da="Lad os forbinde!" data-en="Let's Connect!">Lad os forbinde!</h3>
+            <p data-da="Interesseret i at diskutere AI-integration, FullStack-udvikling eller mit professionelle baggrund? Jeg vil gerne høre fra dig!" data-en="Interested in discussing AI integration, FullStack development, or my professional background? I'd love to hear from you!">Interesseret i at diskutere AI-integration, FullStack-udvikling eller mit professionelle baggrund? Jeg vil gerne høre fra dig!</p>
+            <div class="contact-buttons">
+              <a href="mailto:chaplyhina.anastasiia@gmail.com" class="btn-primary" data-da="Send Email" data-en="Send Email">Send Email</a>
+              <a href="tel:+4555279574" class="btn-secondary" data-da="Ring Nu" data-en="Call Now">Ring Nu</a>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -281,7 +390,7 @@
       hidden
     >
       <header class="ai-chat__header">
-        <h2 id="ai-chat-title">Chat med Anastasiias CV-bot</h2>
+        <h2 id="ai-chat-title" data-da="Chat med Anastasiias CV-bot" data-en="Chat with Anastasiia's CV Bot">Chat med Anastasiias CV-bot</h2>
         <div class="ai-chat__actions">
           <button
             id="ai-chat-minimize"
@@ -310,15 +419,17 @@
       ></div>
 
       <div class="ai-chat__suggests" id="ai-chat-suggests">
-        <button data-q="Fortæl om din erfaring hos UIA">
-          Erfaring hos UIA
+        <button data-q-da="Fortæl om din erfaring med AI integration" data-q-en="Tell me about your AI integration experience" data-da="AI Integration" data-en="AI Integration">
+          AI Integration
         </button>
-        <button data-q="Hvilke tekniske færdigheder har du?">
+        <button data-q-da="Hvilke tekniske færdigheder har du?" data-q-en="What technical skills do you have?" data-da="Tekniske færdigheder" data-en="Technical Skills">
           Tekniske færdigheder
         </button>
-        <button data-q="Hvilke sprog taler du?">Sprog</button>
-        <button data-q="Fortæl om frivilligt arbejde">
-          Frivilligt arbejde
+        <button data-q-da="Fortæl om din krisehåndteringserfaring" data-q-en="Tell me about your crisis management experience" data-da="Krisehåndtering" data-en="Crisis Management">
+          Krisehåndtering
+        </button>
+        <button data-q-da="Hvilke sprog taler du?" data-q-en="What languages do you speak?" data-da="Sprog" data-en="Languages">
+          Sprog
         </button>
       </div>
 
@@ -336,8 +447,10 @@
           id="ai-chat-input"
           name="q"
           placeholder="Spørg om erfaring, skills, uddannelse… (da/en)"
+          data-placeholder-da="Spørg om erfaring, skills, uddannelse… (da/en)"
+          data-placeholder-en="Ask about experience, skills, education… (da/en)"
         />
-        <button type="submit" class="ai-chat__send" aria-label="Send">
+        <button type="submit" class="ai-chat__send" aria-label="Send" data-da="Send" data-en="Send">
           Send
         </button>
       </form>
